@@ -5,11 +5,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\PermissionController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SiteController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+Route::get('/', [SiteController::class, 'index'])->name('index');
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -20,7 +19,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::group(['middleware' => ['role:admin']], function () { 
+Route::get('/produtos', [ProductController::class, 'index'])->name('products.index');
+
+
     Route::get('/admin', function () {
         return view('admin.dashboard');
     })->name('admin.dashboard');  
@@ -35,7 +36,7 @@ Route::group(['middleware' => ['role:admin']], function () {
         return view('admin.ui-elements');
     })->name('admin.ui-elements');
  
- });
+ 
 
  Route::group(['middleware' => ['permission:publish articles']], function () {
 

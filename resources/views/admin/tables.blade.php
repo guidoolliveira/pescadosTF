@@ -1,4 +1,4 @@
-<x-admin-layout>
+<x-app-layout>
     <h3 class="text-gray-700 text-3xl font-medium">Tables</h3>
 
     <div class="mt-4">
@@ -464,4 +464,4 @@
             </div>
         </div>
     </div>
-</x-admin-layout>
+</x-app-layout>
