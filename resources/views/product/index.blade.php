@@ -29,18 +29,18 @@
             <table class="text-left w-full border-collapse">
                 <thead class="border-b">
                     <tr>
-                        <th class="py-3 px-5 bg-indigo-800 font-medium uppercase text-sm text-gray-100">Produto</th>
-                        <th class="py-3 px-5 bg-indigo-800 font-medium uppercase text-sm text-gray-100">Quantidade</th>
-                        <th class="py-3 px-5 bg-indigo-800 font-medium uppercase text-sm text-gray-100">Data de Validade</th>
-                        <th class="py-3 px-5 bg-indigo-800 font-medium uppercase text-sm text-gray-100">Ações</th>
+                        <th class="py-3 px-5 bg-gray-900 font-medium uppercase text-sm text-gray-100">Produto</th>
+                        <th class="py-3 px-5 bg-gray-900 font-medium uppercase text-sm text-gray-100">Quantidade</th>
+                        <th class="py-3 px-5 bg-gray-900 font-medium uppercase text-sm text-gray-100">Data de Validade</th>
+                        <th class="py-3 px-5 bg-gray-900 font-medium uppercase text-sm text-gray-100">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($products as $p)
                         <tr class="hover:bg-gray-200">
-                            <td class="py-4 px-6 border-b text-gray-700 text-lg">{{ $p->name }}</td>
-                            <td class="py-4 px-6 border-b text-gray-500">{{ $p->quantity }}</td>
-                            <td class="py-4 px-6 border-b text-gray-500">{{ $p->validity }}</td>
+                            <td class="py-4 px-6 border-b text-gray-800 text-lg">{{ $p->name }}</td>
+                            <td class="py-4 px-6 border-b text-gray-600">{{ $p->quantity }}</td>
+                            <td class="py-4 px-6 border-b text-gray-600">{{ $p->validity }}</td>
                             <td class="py-4 px- border-b whitespace-nowrap">
                                 <a class="text-blue-600 hover:text-blue-800 mr-4" href="{{ route('products.edit', ['product' => $p->id]) }}">Editar</a> 
                                 <form class="inline" action="{{ route('products.destroy', ['product' => $p->id]) }}" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir este produto?');">

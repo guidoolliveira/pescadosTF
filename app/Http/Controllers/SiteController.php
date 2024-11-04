@@ -14,6 +14,20 @@ class SiteController extends Controller
     public function index()
     {
         if(Auth::id()){
+            
+    $products= Produto::all();
+
+    $lowestQuantityProduct = Product::orderBy('quantidade', 'asc')->first();
+
+
+    $expiredproducts = Product::where('data_vencimento', '<', now())->get();
+
+
+    return view('dashboard', [
+        'products' => $products,
+        'lowestQuantityProduct' => $lowestQuantityProduct,
+        'expiredproducts' => $expiredproducts,
+    ]);
             return view('dashboard');
         }else{
             return view('auth.login');
