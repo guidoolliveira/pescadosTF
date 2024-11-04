@@ -4,13 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
-
+use GuzzleHttp\Handler\Proxy;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public readonly Product $product;
+    public function __construct()
+    {
+        $this->product = new Product();
+    }
     public function index()
     {
         $products = Product::all();
@@ -22,7 +24,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view("product.create");
+
     }
 
     /**
@@ -30,7 +33,16 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $created = $this->product->create([
+            'name' => $request->input('name'),
+            'quantity' => $request->input('quantity'),
+            'validity' => $request->input('validity')
+        ]);
+        if($created){
+            return redirect()->route("products.index")->with('success', 'Produto Cadastrado com Sucesso' );
+        }
+        return redirect()->back()->with('message', 'Erro ao cadastrar' );
+
     }
 
     /**
@@ -44,9 +56,9 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Product $product)
     {
-        //
+        return view("product.edit", ["product" => $product]);
     }
 
     /**
@@ -54,7 +66,11 @@ class ProductController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $updated = $this->product->where('id', $id)->update($request->except('_token', '_method'));
+        if($updated){
+            return redirect()->route("products.index")->with('success', 'Produto Editado com Sucesso' );
+        }
+        return redirect()->back()->with('message', 'Erro ao editar' );
     }
 
     /**
@@ -62,6 +78,7 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $this->product->where('id', $id)->delete();
+        return redirect()->route("products.index")->with('success', 'Produto deletado com Sucesso' );
     }
 }

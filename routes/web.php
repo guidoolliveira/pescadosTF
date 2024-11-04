@@ -20,6 +20,11 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/produtos', [ProductController::class, 'index'])->name('products.index');
+Route::get('/produtos/cadastrar', [ProductController::class, 'create'])->name('products.create');
+Route::post('/produtos', [ProductController::class, 'store'])->name('products.store');
+Route::get('/produtos/{product}/editar', [ProductController::class, 'edit'])->name('products.edit');
+Route::put('/produtos/{product}', [ProductController::class, 'update'])->name('products.update');
+Route::delete('/produtos/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
 
 
     Route::get('/admin', function () {

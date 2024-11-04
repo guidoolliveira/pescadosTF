@@ -1,4 +1,4 @@
-<x-admin-layout>
+<x-app-layout>
     <x-slot name="header">
         <h1 class="text-2xl font-bold">Create User</h1>
     </x-slot>
@@ -62,4 +62,4 @@
             </div>
         </form>
     </div>
-</x-admin-layout>
+</x-app-layout>

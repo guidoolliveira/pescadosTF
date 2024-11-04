@@ -190,7 +190,7 @@
         <div class="mt-4">
             <div class="flex rounded-md bg-white py-4 px-4 overflow-x-auto">
                 <div class="flex rounded mr-4">
-                    <a href="#" class="py-2 px-3 leading-tight bg-white border border-gray-200 text-blue-700 border-r-0 ml-0 rounded-l hover:bg-indigo-500 hover:text-white"><span>Previous</a></a>
+                    <a href="#" class="py-2 px-3 leading-tight bg-white border border-gray-200 text-blue-700 border-r-0 ml-0 rounded-l hover:bg-indigo-500 hover:text-white"><span>Previous</a>
                     <a href="#" class="py-2 px-3 leading-tight bg-white border border-gray-200 text-blue-700 border-r-0 hover:bg-indigo-500 hover:text-white"><span>1</span></a>
                     <a href="#" class="py-2 px-3 leading-tight bg-white border border-gray-200 text-blue-700 border-r-0 hover:bg-indigo-500 hover:text-white"><span>2</span></a>
                     <a href="#" class="py-2 px-3 leading-tight bg-white border border-gray-200 text-blue-700 border-r-0 hover:bg-indigo-500 hover:text-white"><span>3</span></a>
