@@ -14,7 +14,7 @@
             </div>
 
             <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Cultivo -->
+
                 <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
                     <h3 class="text-lg font-semibold">Cultivo</h3>
                     <ul>
@@ -24,7 +24,6 @@
                     </ul>
                 </div>
 
-                <!-- Viveiro -->
                 <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
                     <h3 class="text-lg font-semibold">Viveiro</h3>
                     <ul>
@@ -33,30 +32,21 @@
                         
                     </ul>
                 </div>
-
-                <!-- Quantidade de Produto no Estoque -->
-                <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
-                    <h3 class="text-lg font-semibold">Estoque de Produtos</h3>
-                    <ul>
-                        @foreach($products as $produto)
-                            <li>{{ $produto->name }}: {{ $produto->quantity }} unidades</li>
-                        @endforeach
-                    </ul>
-                </div>
-
-                <!-- Produto de Menor Quantidade -->
                 <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
                     <h3 class="text-lg font-semibold">Produto de Menor Quantidade</h3>
-                    <p> $produtoMenorQuantidade->nome :  $produtoMenorQuantidade->quantidade  unidades</p>
+                    @foreach($lowestQuantityProducts as $produto)
+                            <li>{{ $produto->name }}: {{ $produto->quantity }} unidades</li>
+                        @endforeach
+                    
                 </div>
+               
 
-                <!-- Produto Vencido -->
                 <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
                     <h3 class="text-lg font-semibold">Produtos Vencidos</h3>
                     <ul>
-                        @foreach($produtosVencidos as $produto)
+                        {{-- @foreach($produtosVencidos as $produto)
                             <li> $produto->nome : Vencido em  $produto->data_vencimento </li>
-                        @endforeach
+                        @endforeach --}}
                     </ul>
                 </div>
             </div>

@@ -28,30 +28,20 @@
             <div x-cloak x-show="notificationOpen" @click="notificationOpen = false" class="fixed inset-0 z-10 w-full h-full"></div>
 
             <div x-cloak x-show="notificationOpen" class="absolute right-0 z-10 mt-2 overflow-hidden bg-white rounded-lg shadow-xl w-80" style="width:20rem;">
-                <a href="#" class="flex items-center px-4 py-3 -mx-2 text-gray-600 hover:text-white hover:bg-indigo-600">
-                    <img class="object-cover w-8 h-8 mx-1 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80" alt="avatar">
-                    <p class="mx-2 text-sm">
-                        <span class="font-bold" href="#">Sara Salah</span> replied on the <span class="font-bold text-indigo-400" href="#">Upload Image</span> artical . 2m
-                    </p>
-                </a>
-                <a href="#" class="flex items-center px-4 py-3 -mx-2 text-gray-600 hover:text-white hover:bg-indigo-600">
-                    <img class="object-cover w-8 h-8 mx-1 rounded-full" src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80" alt="avatar">
-                    <p class="mx-2 text-sm">
-                        <span class="font-bold" href="#">Slick Net</span> start following you . 45m
-                    </p>
-                </a>
-                <a href="#" class="flex items-center px-4 py-3 -mx-2 text-gray-600 hover:text-white hover:bg-indigo-600">
-                    <img class="object-cover w-8 h-8 mx-1 rounded-full" src="https://images.unsplash.com/photo-1450297350677-623de575f31c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80" alt="avatar">
-                    <p class="mx-2 text-sm">
-                        <span class="font-bold" href="#">Jane Doe</span> Like Your reply on <span class="font-bold text-indigo-400" href="#">Test with TDD</span> artical . 1h
-                    </p>
-                </a>
-                <a href="#" class="flex items-center px-4 py-3 -mx-2 text-gray-600 hover:text-white hover:bg-indigo-600">
-                    <img class="object-cover w-8 h-8 mx-1 rounded-full" src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=398&q=80" alt="avatar">
-                    <p class="mx-2 text-sm">
-                        <span class="font-bold" href="#">Abigail Bennett</span> start following you . 3h
-                    </p>
-                </a>
+                @if($outOfStockProducts->isNotEmpty())
+                <div class="bg-red-100 text-red-800 p-4 rounded-lg shadow">
+                    <h3 class="text-lg font-semibold">Produtos Fora de Estoque</h3>
+                    <ul>
+                        @foreach($outOfStockProducts as $produto)
+                            <li>{{ $produto->name }} está fora de estoque!</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @else
+                <div class="bg-green-100 text-green-800 p-4 rounded-lg shadow">
+                    <p>Todos os produtos estão em estoque.</p>
+                </div>
+            @endif
             </div>
         </div>
         

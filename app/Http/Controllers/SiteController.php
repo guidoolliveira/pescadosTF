@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use App\Models\Product;
 
 class SiteController extends Controller
 {
@@ -12,26 +12,16 @@ class SiteController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        if(Auth::id()){
-            
-    $products= Produto::all();
-
-    $lowestQuantityProduct = Product::orderBy('quantidade', 'asc')->first();
-
-
-    $expiredproducts = Product::where('data_vencimento', '<', now())->get();
-
-
+    {     
+    $products = Product::all();
+    $lowestQuantityProducts = Product::orderBy('quantity', 'asc')->take(3)->get();
+    $outOfStockProducts = Product::where('quantity', 0)->get();
+    // $expiredproducts = Product::where('data_vencimento', '<', now())->get();
     return view('dashboard', [
         'products' => $products,
-        'lowestQuantityProduct' => $lowestQuantityProduct,
-        'expiredproducts' => $expiredproducts,
+        'lowestQuantityProducts' => $lowestQuantityProducts,
+        'outOfStockProducts' => $outOfStockProducts,
     ]);
-            return view('dashboard');
-        }else{
-            return view('auth.login');
-        }
     }
 
     /**
