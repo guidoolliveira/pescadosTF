@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\BiometriaController;
 use App\Http\Controllers\SiteController;
 
 Route::get('/', [SiteController::class, 'index'])->middleware(['auth', 'verified'])->name('index');
@@ -22,6 +23,14 @@ Route::post('/produtos', [ProductController::class, 'store'])->name('products.st
 Route::get('/produtos/{product}/editar', [ProductController::class, 'edit'])->name('products.edit');
 Route::put('/produtos/{product}', [ProductController::class, 'update'])->name('products.update');
 Route::delete('/produtos/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
+
+Route::get('/biometria', [BiometriaController::class, 'index'])->name('biometrias.index');
+Route::get('/biometria/cadastrar', [BiometriaController::class, 'create'])->name('biometrias.create');
+Route::post('/biometria', [BiometriaController::class, 'store'])->name('biometrias.store');
+Route::get('/biometria/{viveiro}/editar', [BiometriaController::class, 'edit'])->name('biometrias.edit');
+Route::put('/biometria/{viveiro}', [BiometriaController::class, 'update'])->name('biometrias.update');
+Route::delete('/biometria/{viveiro}', [BiometriaController::class, 'destroy'])->name('biometrias.destroy');
+
 
 
     Route::get('/admin', function () {
@@ -40,9 +49,6 @@ Route::delete('/produtos/{product}', [ProductController::class, 'destroy'])->nam
  
  
 
- Route::group(['middleware' => ['permission:publish articles']], function () {
-
- });
 
  // Group routes that need admin role and authentication
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
