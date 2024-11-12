@@ -1,8 +1,9 @@
 <x-app-layout>
     <h3 class="text-gray-700 text-3xl font-medium">Controle de Estoque</h3>
     <div class="mt-4 flex justify-center">
-        <div class="p-6 shadow-lg w-full sm:w-1/2 rounded-lg mt-8">
-            <h2 class="text-xl text-gray-700 font-bold mb-6">Cadastrar Produto</h2> 
+        <div class=" shadow-lg w-full sm:w-1/2 rounded-lg mt-8">
+            <h2 class="text-xl py-3 rounded-t-lg px-6 text-white bg-gray-800 font-bold">Editar Produto</h2> 
+            <div class="p-6">
             <form method="POST" action="{{route('products.store')}}">
                 @csrf
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -27,6 +28,7 @@
                     <button type="submit" class="px-6 py-2 bg-gray-800 text-gray-200 rounded-md hover:bg-gray-700 focus:outline-none focus:bg-gray-700">Cadastrar</button>
                 </div>
             </form>
+        </div>
         </div>
     </div>
 </x-app-layout>

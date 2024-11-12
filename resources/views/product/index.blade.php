@@ -40,7 +40,7 @@
                         <tr class="hover:bg-gray-200">
                             <td class="py-4 px-6 border-b text-gray-800 text-lg">{{ $p->name }}</td>
                             <td class="py-4 px-6 border-b text-gray-600">{{ $p->quantity }}</td>
-                            <td class="py-4 px-6 border-b text-gray-600">{{ $p->validity }}</td>
+                            <td class="py-4 px-6 border-b text-gray-600">{{ date('d/m/Y', strtotime($p->validity )) }}</td>
                             <td class="py-4 px- border-b whitespace-nowrap">
                                 <a class="text-blue-600 hover:text-blue-800 mr-4" href="{{ route('products.edit', ['product' => $p->id]) }}">Editar</a> 
                                 <form class="inline" action="{{ route('products.destroy', ['product' => $p->id]) }}" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir este produto?');">

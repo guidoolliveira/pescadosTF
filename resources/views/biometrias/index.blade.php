@@ -16,23 +16,16 @@
             </div>
         @endif
     </div>
-
-    <h3 class="text-gray-700 text-3xl font-medium">Biometrias</h3>
-
-    <div class="text-right mb-4">
-        <a href="{{ route('biometrias.create') }}">
-            <button class="px-4 py-2 bg-gray-600 rounded-md text-white font-medium tracking-wide hover:bg-gray-500">Nova Biometria</button>
-        </a>
-    </div>
-    <div class="mt-8">
-            <h2 class="text-xl font-semibold text-gray-700 leading-tight">Users</h2>
-
-            <div class="mt-3 flex flex-col sm:flex-row">
+    <h3 class="text-gray-700 text-3xl font-medium mb-6">Biometrias</h3>
+    <div class="text flex justify-between mb-4">
+        <div>
+        <h2 class="text-xl font-semibold text-gray-700 leading-tight">Viveiro</h2>
+            <div class="mt-2 flex flex-col sm:flex-row">
                 <div class="flex">
                     <div class="relative">
                         
                         <select class="appearance-none h-full rounded-l border block w-full bg-white border-gray-400 text-gray-700 py-2 px-4 pr-8 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" onchange="window.location.href=this.value;">
-                            <option value="">Selecione um Viveiro</option>
+                            <option value="{{ route('biometrias.index')}}">Todos os Viveiros</option>
                             @foreach ($viveiros as $viveiro)
                                 <option value="{{ route('biometrias.index', ['viveiro_id' => $viveiro->id]) }}" 
                                         @if(request()->viveiro_id == $viveiro->id) selected @endif>
@@ -43,31 +36,34 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <a href="{{ route('biometrias.create') }}">
+            <button class="px-4 py-2 bg-gray-600 rounded-md text-white font-medium tracking-wide hover:bg-gray-500">Nova Biometria</button>
+        </a>
+    </div>
+            
             @if (isset($biometrias) && $biometrias->isNotEmpty())
-            <div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
-                <div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
-                    <table class="min-w-full leading-normal">
-                        <thead>
+            <div class="bg-white shadow rounded-md overflow-hidden my-6">
+                <div class="overflow-x-auto"> 
+                    <table class="text-left w-full border-collapse">
+                        <thead class="border-b">
                             <tr>
-                                <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Viveiro</th>
-                                <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Data da Biometria</th>
-                                <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"></th>
+                                <th class="py-3 px-5 bg-gray-900 font-medium uppercase text-sm text-gray-100">Viveiro</th>
+                                <th class="py-3 px-5 bg-gray-900 font-medium uppercase text-sm text-gray-100">Data da Biometria</th>
+                                <th class="py-3 px-5 bg-gray-900 font-medium uppercase text-sm text-gray-100">Gramatura</th>
+                                <th class="py-3 px-5 bg-gray-900 font-medium uppercase text-sm text-gray-100"></th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($biometrias as $b)
-                            <tr>
-                                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                    <p class="text-gray-900 whitespace-no-wrap">{{ $b->viveiro->name }}</p>
-                                </td>
-                                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                    <p class="text-gray-900 whitespace-no-wrap">{{ $b->date }}</p>
-                                </td>
-                                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                    <p class="text-gray-900 whitespace-no-wrap">
-                                        <a class="text-blue-600 hover:text-blue-800 mr-4" href="{{ route('biometrias.show', ['biometria' => $b->id]) }}">Detalhes</a> </p>
-                                </td>
-                            </tr>
+                                <tr class="hover:bg-gray-200">
+                                    <td class="py-4 px-6 border-b text-gray-800">{{ $b->viveiro->name }}</td>
+                                    <td class="py-4 px-6 border-b text-gray-600">{{ date('d/m/Y', strtotime($b->date )) }}</td>
+                                    <td class="py-4 px-6 border-b text-gray-600">{{ $b->shrimp_weight }}g</td>
+                                    <td class="py-4 border-b whitespace-nowrap">
+                                        <a class="text-blue-600 hover:text-blue-800 mr-4" href="{{ route('biometrias.show', ['biometria' => $b->id]) }}">Exibir</a> 
+                                    </td>                            
+                                </tr>
                             @endforeach
                         </tbody>
                     </table>

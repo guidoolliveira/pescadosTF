@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-admin-layout>
     <x-slot name="header">
         <h1 class="text-2xl font-bold">Users List</h1>
     </x-slot>
@@ -86,4 +86,4 @@
             @endforelse
         </div>
     </div>
-</x-app-layout>
+</x-admin-layout>

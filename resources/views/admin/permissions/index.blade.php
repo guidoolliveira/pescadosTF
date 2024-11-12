@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-admin-layout>
     <x-slot name="header">
         <h1 class="text-2xl font-bold">Permissions List</h1>
     </x-slot>
@@ -66,4 +66,4 @@
             @endif
         </div>
     </div>
-</x-app-layout>
+</x-admin-layout>

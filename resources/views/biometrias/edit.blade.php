@@ -1,8 +1,9 @@
 <x-app-layout>
-        <h3 class="text-gray-700 text-3xl font-medium">Controle de Estoque</h3>
+        <h3 class="text-gray-700 text-3xl font-medium">Biometrias</h3>
         <div class="mt-4 flex justify-center">
-            <div class="p-6 shadow-lg w-full sm:w-1/2 rounded-lg mt-8">
-                <h2 class="text-xl text-gray-700 font-bold mb-6">Editar Biometria</h2> 
+            <div class=" shadow-lg w-full sm:w-1/2 rounded-lg mt-8">
+                <h2 class="text-xl py-3 rounded-t-lg px-6 text-white bg-gray-800 font-bold">Cadastrar Biometria</h2> 
+                <div class="p-6">
                 <form method="POST" action="{{route('biometrias.update', ['biometria' => $biometria->id])}}" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="_method" value="PUT">
@@ -43,10 +44,11 @@
                     </div>
     
                     <div class="flex justify-end mt-6">
-                        <a href="{{route("products.index")}}" class="py-2 px-4 leading-tight border border-gray-200 text-blue-700 rounded-l mr-4">Voltar</a>
+                        <a href="{{route("biometrias.index")}}" class="py-2 px-4 leading-tight border border-gray-200 text-blue-700 rounded-l mr-4">Voltar</a>
                         <button type="submit" class="px-6 py-2 bg-gray-800 text-gray-200 rounded-md hover:bg-gray-700 focus:outline-none focus:bg-gray-700">Editar</button>
                     </div>
                 </form>
+                </div>
             </div>
         </div>
 </x-app-layout>
