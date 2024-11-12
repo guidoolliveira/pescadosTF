@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('biometrias', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->float("shrimp_weight");
             $table->float("weight");
             $table->integer("quantity");
             $table->date("date");

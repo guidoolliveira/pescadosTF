@@ -15,7 +15,8 @@ class Biometria extends Model
         'date',
         'description', 
         'image',
-        'viveiro_id'
+        'viveiro_id',
+        'shrimp_weight'
     ];
 
     public function viveiro()
