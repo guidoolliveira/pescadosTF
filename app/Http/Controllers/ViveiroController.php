@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Viveiro;
 use Illuminate\Http\Request;
 
 class ViveiroController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public readonly Viveiro $viveiro;
+    public function __construct()
+    {
+        $this->viveiro = new Viveiro();
+    }
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -27,7 +30,13 @@ class ViveiroController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $created = $this->viveiro->create([
+            'name' => $request->input('name')
+        ]);
+        if($created){
+            return redirect()->route("dashboard")->with('success', 'Viveiro Cadastrado com Sucesso' );
+        }
+        return redirect()->back()->with('message', 'Erro ao cadastrar' );
     }
 
     /**

@@ -25,9 +25,10 @@ class BiometriaController extends Controller
 
     public function store(Request $request)
     {
-        $imagePath = null;
+
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('images', 'public');
+            $fileName = now()->format('Ymd_His') . '.' . $request->image->extension();
+            $imagePath = $request->file('image')->storeAs('images', $fileName, 'public');
         }
 
         Biometria::create([

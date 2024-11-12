@@ -2,7 +2,7 @@
     <div class="container">
         <h1>Criar Biometria</h1>
 
-        <form action="{{ route('biometrias.store') }}" method="POST">
+        <form action="{{ route('biometrias.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
                 <label for="weight">Peso</label>

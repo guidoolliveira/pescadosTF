@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\BiometriaController;
 use App\Http\Controllers\SiteController;
+use App\Http\Controllers\ViveiroController;
 
 Route::get('/', [SiteController::class, 'index'])->middleware(['auth', 'verified'])->name('index');
 Route::get('/dashboard', [SiteController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
@@ -28,10 +29,11 @@ Route::get('/biometria', [BiometriaController::class, 'index'])->name('biometria
 Route::get('/biometria/cadastrar', [BiometriaController::class, 'create'])->name('biometrias.create');
 Route::post('/biometria', [BiometriaController::class, 'store'])->name('biometrias.store');
 Route::get('/biometria/{viveiro}/editar', [BiometriaController::class, 'edit'])->name('biometrias.edit');
+Route::get('/biometria/{viveiro}/detalhes', [BiometriaController::class, 'show'])->name('biometrias.show');
 Route::put('/biometria/{viveiro}', [BiometriaController::class, 'update'])->name('biometrias.update');
 Route::delete('/biometria/{viveiro}', [BiometriaController::class, 'destroy'])->name('biometrias.destroy');
 
-
+Route::post('/viveiro', [ViveiroController::class, 'store'])->name('viveiros.store');
 
     Route::get('/admin', function () {
         return view('admin.dashboard');
