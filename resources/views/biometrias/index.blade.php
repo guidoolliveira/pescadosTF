@@ -38,7 +38,7 @@
             </div>
         </div>
         <a href="{{ route('biometrias.create') }}">
-            <button class="px-4 py-2 bg-gray-600 rounded-md text-white font-medium tracking-wide hover:bg-gray-500">Nova Biometria</button>
+            <button class="mt-8 px-4 py-2 bg-gray-600 rounded-md text-white font-medium tracking-wide hover:bg-gray-500">Nova Biometria</button>
         </a>
     </div>
             

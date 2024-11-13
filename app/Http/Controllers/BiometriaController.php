@@ -12,16 +12,14 @@ class BiometriaController extends Controller
     public function index(Request $request)
     {
         $viveiros = Viveiro::all();
-        $biometrias = Biometria::with('viveiro')
-    ->when($request->filled('viveiro_id'), function($query) use ($request) {
-        return $query->where('viveiro_id', $request->viveiro_id);
-    })->whereIn('id', function($query) {
-        $query->selectRaw('MAX(id)')
-            ->from('biometrias')
-            ->groupBy('viveiro_id');
+        $biometrias = Biometria::select('biometrias.*')
+        ->join(Biometria::raw('(SELECT viveiro_id, MAX(date) AS date FROM biometrias GROUP BY viveiro_id) AS ultima_biometria'), function ($join) {
+        $join->on('biometrias.viveiro_id', '=', 'ultima_biometria.viveiro_id')
+            ->on('biometrias.date', '=', 'ultima_biometria.date');
     })
+    ->with('viveiro')
     ->get();
-    
+
         return view('biometrias.index', [
             'biometrias' => $biometrias,
             'viveiros' => $viveiros,
@@ -58,7 +56,7 @@ class BiometriaController extends Controller
     }
     public function show($id)   
     {
-        $biometria = Biometria::with('viveiro')->findOrFail($id); // Obtém a biometria com o viveiro associado
+        $biometria = Biometria::with('viveiro')->findOrFail($id); 
         return view('biometrias.show', compact('biometria'));
     }
 
