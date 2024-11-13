@@ -8,9 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Viveiro extends Model
 {
     use HasFactory;
-    protected $fillable = ['name']; // Nome do viveiro
+    protected $fillable = [
+        'name',
+        'width',
+        'lenght',
+        'area'
+    ]; 
 
-    // Relacionamento: um Viveiro pode ter muitas Biometrias
     public function biometrias()
     {
         return $this->hasMany(Biometria::class);

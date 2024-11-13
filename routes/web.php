@@ -10,6 +10,7 @@ use App\Http\Controllers\BiometriaController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\ViveiroController;
 
+
 Route::get('/', [SiteController::class, 'index'])->middleware(['auth', 'verified'])->name('index');
 Route::get('/dashboard', [SiteController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 Route::middleware('auth')->group(function () {
@@ -32,6 +33,7 @@ Route::get('/biometrias/{biometria}/editar', [BiometriaController::class, 'edit'
 Route::get('/biometrias/{biometria}/detalhes', [BiometriaController::class, 'show'])->name('biometrias.show');
 Route::put('/biometrias/{biometria}', [BiometriaController::class, 'update'])->name('biometrias.update');
 Route::delete('/biometrias/{biometria}', [BiometriaController::class, 'destroy'])->name('biometrias.destroy');
+
 
 Route::post('/viveiro', [ViveiroController::class, 'store'])->name('viveiros.store');
 

@@ -13,10 +13,14 @@ class BiometriaController extends Controller
     {
         $viveiros = Viveiro::all();
         $biometrias = Biometria::with('viveiro')
-            ->when($request->filled('viveiro_id'), function($query) use ($request) {
-                return $query->where('viveiro_id', $request->viveiro_id);
-            })
-            ->get();
+    ->when($request->filled('viveiro_id'), function($query) use ($request) {
+        return $query->where('viveiro_id', $request->viveiro_id);
+    })->whereIn('id', function($query) {
+        $query->selectRaw('MAX(id)')
+            ->from('biometrias')
+            ->groupBy('viveiro_id');
+    })
+    ->get();
     
         return view('biometrias.index', [
             'biometrias' => $biometrias,

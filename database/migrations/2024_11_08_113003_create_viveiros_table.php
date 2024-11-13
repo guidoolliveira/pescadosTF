@@ -15,6 +15,9 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string("name");
+            $table->float("width");
+            $table->float("length");
+            $table->float("area");
         });
     }
 

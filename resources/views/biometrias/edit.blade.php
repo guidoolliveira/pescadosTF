@@ -1,5 +1,5 @@
 <x-app-layout>
-        <h3 class="text-gray-700 text-3xl font-medium">Biometrias</h3>
+        <h3 class="text-gray-700 text-3xl font-medium">Biometria</h3>
         <div class="mt-4 flex justify-center">
             <div class=" shadow-lg w-full sm:w-1/2 rounded-lg mt-8">
                 <h2 class="text-xl py-3 rounded-t-lg px-6 text-white bg-gray-800 font-bold">Cadastrar Biometria</h2> 

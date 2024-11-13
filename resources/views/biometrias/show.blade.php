@@ -39,7 +39,7 @@
                 <!-- Data da Biometria -->
                 <div>
                     <h3 class="text-lg font-medium text-gray-700">Data da Biometria</h3>
-                    <p class="text-gray-900">{{ \Carbon\Carbon::parse($biometria->date)->format('d/m/Y') }}</p>
+                    <p class="text-gray-900">{{ date('d/m/Y', strtotime($biometria->date )) }}</p>
                 </div>
             </div>
 

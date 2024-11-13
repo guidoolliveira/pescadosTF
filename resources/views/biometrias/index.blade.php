@@ -16,7 +16,7 @@
             </div>
         @endif
     </div>
-    <h3 class="text-gray-700 text-3xl font-medium mb-6">Biometrias</h3>
+    <h3 class="text-gray-700 text-3xl font-medium mb-6">Biometria</h3>
     <div class="text flex justify-between mb-4">
         <div>
         <h2 class="text-xl font-semibold text-gray-700 leading-tight">Viveiro</h2>
@@ -70,7 +70,7 @@
                 </div>
             </div>
             @else 
-                <p class="text-gray-500 text-3xl text-center">Nenhuma biometria cadastrada para este viveiro.</p>
+                <p class="text-gray-500 text-3xl text-center">Nenhuma biometria cadastrada.</p>
             @endif
         </div>
     </div>
