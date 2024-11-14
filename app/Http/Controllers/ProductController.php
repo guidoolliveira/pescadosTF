@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
-use GuzzleHttp\Handler\Proxy;
 
 class ProductController extends Controller
 {
@@ -36,6 +35,7 @@ class ProductController extends Controller
         $created = $this->product->create([
             'name' => $request->input('name'),
             'quantity' => $request->input('quantity'),
+            'lot' => $request->input('lot'),
             'validity' => $request->input('validity')
         ]);
         if($created){

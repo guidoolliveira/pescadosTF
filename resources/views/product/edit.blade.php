@@ -8,7 +8,7 @@
                 @csrf
                 <input type="hidden" name="_method" value="PUT" >
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <div class="col-span-2 flex flex-col">
+                    <div class="flex flex-col">
                         <label class="text-gray-700 mb-1" for="name">Nome</label>
                         <input class="form-input w-full mt-2 rounded-md focus:border-indigo-600" type="text" name="name" value="{{$product->name}}" required>
                     </div>
@@ -18,6 +18,10 @@
                         <input class="form-input w-full mt-2 rounded-md focus:border-indigo-600" type="number" name="quantity" value="{{$product->quantity}}" required>
                     </div>
 
+                    <div class="flex flex-col">
+                        <label class="text-gray-700 mb-1" for="validity">Lote</label>
+                        <input class="form-input w-full mt-2 rounded-md focus:border-indigo-600" type="date" name="validity" value="{{$product->lot}}" required>
+                    </div>
                     <div class="flex flex-col">
                         <label class="text-gray-700 mb-1" for="validity">Data de Validade</label>
                         <input class="form-input w-full mt-2 rounded-md focus:border-indigo-600" type="date" name="validity" value="{{$product->validity}}" required>

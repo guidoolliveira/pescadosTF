@@ -2,12 +2,12 @@
     <h3 class="text-gray-700 text-3xl font-medium">Controle de Estoque</h3>
     <div class="mt-4 flex justify-center">
         <div class=" shadow-lg w-full sm:w-1/2 rounded-lg mt-8">
-            <h2 class="text-xl py-3 rounded-t-lg px-6 text-white bg-gray-800 font-bold">Editar Produto</h2> 
+            <h2 class="text-xl py-3 rounded-t-lg px-6 text-white bg-gray-800 font-bold">Cadastrar Produto</h2> 
             <div class="p-6">
             <form method="POST" action="{{route('products.store')}}">
                 @csrf
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <div class="col-span-2 flex flex-col">
+                    <div class="flex flex-col">
                         <label class="text-gray-700 mb-1" for="name">Nome</label>
                         <input class="form-input w-full mt-2 rounded-md focus:border-indigo-600" type="text" name="name" required>
                     </div>
@@ -17,6 +17,10 @@
                         <input class="form-input w-full mt-2 rounded-md focus:border-indigo-600" type="number" name="quantity" required >
                     </div>
 
+                    <div class="flex flex-col">
+                        <label class="text-gray-700 mb-1" for="validity">Lote</label>
+                        <input class="form-input w-full mt-2 rounded-md focus:border-indigo-600" type="date" name="lot" required>
+                    </div>
                     <div class="flex flex-col">
                         <label class="text-gray-700 mb-1" for="validity">Data de Validade</label>
                         <input class="form-input w-full mt-2 rounded-md focus:border-indigo-600" type="date" name="validity" required>

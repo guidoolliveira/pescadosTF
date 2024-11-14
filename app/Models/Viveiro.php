@@ -11,7 +11,7 @@ class Viveiro extends Model
     protected $fillable = [
         'name',
         'width',
-        'lenght',
+        'length',
         'area'
     ]; 
 

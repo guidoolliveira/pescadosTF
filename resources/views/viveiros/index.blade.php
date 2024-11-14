@@ -17,39 +17,36 @@
         @endif
     </div>
 
-    <h3 class="text-gray-700 text-3xl font-medium">Controle de Estoque</h3>
+    <h3 class="text-gray-700 text-3xl font-medium">Viveiros</h3>
 <div class="text-right ">
-    <a class="" href="{{ route('products.create') }}">
+    <a class="" href="{{ route('viveiros.create') }}">
         <button class="px-4 py-2 bg-gray-600 rounded-md text-white font-medium tracking-wide hover:bg-gray-500">Cadastrar</button>
     </a>
 </div>
-@if ($products->isNotEmpty())
+@if ($viveiros->isNotEmpty())
     <div class="bg-white shadow rounded-md overflow-hidden my-6">
         <div class="overflow-x-auto"> 
             <table class="text-left w-full border-collapse">
                 <thead class="border-b">
                     <tr>
-                        <th class="py-3 px-5 bg-gray-900 font-medium uppercase text-sm text-gray-100">Produto</th>
-                        <th class="py-3 px-5 bg-gray-900 font-medium uppercase text-sm text-gray-100">Quantidade</th>
-                        <th class="py-3 px-5 bg-gray-900 font-medium uppercase text-sm text-gray-100">Lote</th>
-                        <th class="py-3 px-5 bg-gray-900 font-medium uppercase text-sm text-gray-100">Data de Validade</th>
+                        <th class="py-3 px-5 bg-gray-900 font-medium uppercase text-sm text-gray-100">#</th>
+                        <th class="py-3 px-5 bg-gray-900 font-medium uppercase text-sm text-gray-100">Área</th>
+                        <th class="py-3 px-5 bg-gray-900 font-medium uppercase text-sm text-gray-100">Última Biometria</th>
+                        <th class="py-3 px-5 bg-gray-900 font-medium uppercase text-sm text-gray-100">Data Biometria</th>
+                        <th class="py-3 px-5 bg-gray-900 font-medium uppercase text-sm text-gray-100">Status</th>
                         <th class="py-3 px-5 bg-gray-900 font-medium uppercase text-sm text-gray-100">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($products as $p)
+                    @foreach ($viveiros as $v)
                         <tr class="hover:bg-gray-200">
-                            <td class="py-4 px-6 border-b text-gray-800 text-lg">{{ $p->name }}</td>
-                            <td class="py-4 px-6 border-b text-gray-600">{{ $p->quantity }}</td>
-                            <td class="py-4 px-6 border-b text-gray-600">{{ date('d/m/Y', strtotime($p->lot )) }}</td>
-                            <td class="py-4 px-6 border-b text-gray-600">{{ date('d/m/Y', strtotime($p->validity )) }}</td>
-                            <td class="py-4 px- border-b whitespace-nowrap">
-                                <a class="text-blue-600 hover:text-blue-800 mr-4" href="{{ route('products.edit', ['product' => $p->id]) }}">Editar</a> 
-                                <form class="inline" action="{{ route('products.destroy', ['product' => $p->id]) }}" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir este produto?');">
-                                    @csrf
-                                    <input type="hidden" name="_method" value="DELETE">
-                                    <button type="submit" class="text-red-600 hover:text-red-800">Excluir</button>
-                                </form>
+                            <td class="py-4 px-6 border-b text-gray-800 text-lg">{{ $v->name }}</td>
+                            <td class="py-4 px-6 border-b text-gray-600">{{ $v->area/10000 }}ha</td>
+                            <td class="py-4 px-6 border-b text-gray-600">{{ $v->gramatura . 'g' ?? 'Sem biometria'}}</td>
+                            <td class="py-4 px-6 border-b text-gray-600">{{ $v->date ?? 'Sem biometria'}}</td>
+                            <td class="py-4 px-6 border-b text-gray-600">{{ $v->date }}</td>
+                            <td class="py-4 px-6 border-b whitespace-nowrap">
+                                <a class="text-blue-600 hover:text-blue-800 mr-4" href="{{ route('viveiros.show', ['viveiro' => $v->id]) }}">Exibir</a> 
                             </td>                            
                         </tr>
                     @endforeach

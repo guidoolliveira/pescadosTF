@@ -41,7 +41,11 @@
             <button class="mt-8 px-4 py-2 bg-gray-600 rounded-md text-white font-medium tracking-wide hover:bg-gray-500">Nova Biometria</button>
         </a>
     </div>
-            
+            @php
+            if (isset($_GET["viveiro_id"])) {
+                $biometrias = $biometrias->where('viveiro_id', $_GET["viveiro_id"]);
+            }
+            @endphp
             @if (isset($biometrias) && $biometrias->isNotEmpty())
             <div class="bg-white shadow rounded-md overflow-hidden my-6">
                 <div class="overflow-x-auto"> 

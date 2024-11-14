@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->integer('quantity');
             $table->date('validity');
+            $table->date('lot');
         });
     }
 
