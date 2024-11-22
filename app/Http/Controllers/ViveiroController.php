@@ -57,8 +57,25 @@ class ViveiroController extends Controller
      * Display the specified resource.
      */
     public function show(string $id)
-    {
-        //
+    {   
+
+       $viveiro = Viveiro::select(
+    'viveiros.id',
+    'viveiros.name',
+    'viveiros.area',
+    'biometrias.id as biometria_id',
+    'biometrias.date as date',
+    'biometrias.image as image',
+    'biometrias.shrimp_weight as gramatura'
+)
+->leftJoin('biometrias', function($join) {
+    $join->on('viveiros.id', '=', 'biometrias.viveiro_id')
+         ->whereRaw('biometrias.date = (SELECT MAX(date) FROM biometrias WHERE viveiro_id = viveiros.id)');
+})
+->where('viveiros.id', $id) 
+->first(); 
+ 
+        return view("viveiros.show", ['viveiro' => $viveiro]);
     }
 
     /**

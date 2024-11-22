@@ -24,7 +24,8 @@ class AdminUserSeeder extends Seeder
             ['email' => 'admin@example.com'], // Use a unique identifier (e.g., email)
             [
                 'name' => 'Admin User',
-                'password' => bcrypt('password') // Use a secure password
+                'username' => 'admin',
+                'password' => bcrypt('12345678') // Use a secure password
             ]
         );
         

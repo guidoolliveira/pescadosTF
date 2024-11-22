@@ -16,58 +16,55 @@
             </div>
         @endif
     </div>
-
-    <div class="container mx-auto p-6">
+    <div class="shadow-lg p-8">
         <div class="mb-4">
             <a href="{{ route('biometrias.index') }}" class="text-blue-600 hover:text-blue-800 transition-colors duration-300">
                 ← Voltar para a lista de biometrias
             </a>
         </div>
-
-        <div class="bg-white shadow-2xl rounded-lg p-6">
-            <h2 class="text-3xl font-semibold mb-4 text-gray-800">Detalhes da Biometria</h2>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="flex flex-col">
-                    <h3 class="text-lg font-medium text-gray-700">Viveiro</h3>
-                    <p class="text-gray-900">{{ $biometria->viveiro->name }}</p>
-                </div>
-
-                <div class="flex flex-col">
-                    <h3 class="text-lg font-medium text-gray-700">Data da Biometria</h3>
-                    <p class="text-gray-900">{{ date('d/m/Y', strtotime($biometria->date )) }}</p>
-                </div>
+        <h2 class="text-3xl font-semibold mb-4 text-gray-800">Detalhes da Biometria</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="flex flex-col">
+                <h3 class="text-lg font-medium text-gray-700">Viveiro</h3>
+                <p class="text-gray-900 ml-1">{{ $biometria->viveiro->name }}</p>
             </div>
-
-            <div class="mt-6">
+    
+            <div class="flex flex-col">
+                <h3 class="text-lg font-medium text-gray-700">Data da Biometria</h3>
+                <p class="text-gray-900 ml-1">{{ date('d/m/Y', strtotime($biometria->date )) }}</p>
+            </div>
+    
+            <div class="flex flex-col">
                 <h3 class="text-lg font-medium text-gray-700">Peso do Camarão</h3>
-                <p class="text-gray-900 text-xl font-semibold">{{ number_format($biometria->shrimp_weight, 2) }}g</p>
+                <p class="text-gray-900 ml-1">{{ number_format($biometria->shrimp_weight, 2) }}g</p>
             </div>
-
-            <div class="mt-6">
+    
+            <div class="flex flex-col">
                 <h3 class="text-lg font-medium text-gray-700">Observações</h3>
-                <p class="text-gray-900">{{ $biometria->description }}</p>
+                <p class="text-gray-900 ml-1 break-words">{{ $biometria->description }}</p>
             </div>
-
+    
             @if ($biometria->image)
-            <div class="mt-6">
+            <div class="flex flex-col col-span-2">
                 <h3 class="text-lg font-medium text-gray-700">Imagem da Biometria</h3>
-                <img src="{{ asset('storage/' . $biometria->image) }}" alt="Imagem da Biometria" class="w-1/5 rounded-xl shadow-lg w-full h-auto transition-transform transform hover:scale-105" />
+                <img src="{{ asset('storage/' . $biometria->image) }}" alt="Imagem da Biometria" class="w-96 mt-2 rounded-xl shadow-lg" />
             </div>
             @endif
-
-            <div class="mt-6 flex space-x-4">
-                <a href="{{ route('biometrias.edit', $biometria->id) }}" class="text-blue-600 hover:text-blue-800 px-6 py-3 border border-blue-500 rounded-lg transition-colors duration-300">
-                    Editar
-                </a>
-                <form action="{{ route('biometrias.destroy', $biometria->id) }}" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir esta biometria?');">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="text-red-600 hover:text-red-800 px-6 py-3 border border-red-500 rounded-lg transition-colors duration-300">
-                        Excluir
-                    </button>
-                </form>
-            </div>
+        </div>
+    
+        <div class="mt-6 flex justify-end space-x-4">
+            <form action="{{ route('biometrias.destroy', $biometria->id) }}" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir esta biometria?');">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="text-red-600 hover:text-red-800 px-4 py-2 border border-red-500 rounded-lg transition-colors duration-300">
+                    Excluir
+                </button>
+            </form>
+            <a href="{{ route('biometrias.edit', $biometria->id) }}" class="text-blue-600 hover:text-blue-800 px-4 py-2 border border-blue-500 rounded-lg transition-colors duration-300">
+                Editar
+            </a>
         </div>
     </div>
+    
+</div>
 </x-app-layout>

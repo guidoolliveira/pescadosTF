@@ -12,7 +12,6 @@ use App\Http\Controllers\ViveiroController;
 
 
 Route::get('/', [SiteController::class, 'index'])->middleware(['auth', 'verified'])->name('index');
-Route::get('/dashboard', [SiteController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 Route::middleware('auth')->group(function () {
     Route::get('/produtos', [ProductController::class, 'index'])->name('products.index');
     Route::get('/produtos/cadastrar', [ProductController::class, 'create'])->name('products.create');
@@ -36,32 +35,9 @@ Route::middleware('auth')->group(function () {
 // Route::get('/biometrias/{biometria}/detalhes', [BiometriaController::class, 'show'])->name('biometrias.show');
 // Route::put('/biometrias/{biometria}', [BiometriaController::class, 'update'])->name('biometrias.update');
 // Route::delete('/biometrias/{biometria}', [BiometriaController::class, 'destroy'])->name('biometrias.destroy');
-
-
-
-    Route::get('/admin', function () {
-        return view('admin.dashboard');
-    })->name('admin.dashboard');  
-
-    Route::get('/forms', function () {
-        return view('admin.forms');
-    })->name('admin.forms'); 
-    Route::get('/tables', function () {
-        return view('admin.tables');
-    })->name('admin.tables'); 
-    Route::get('/ui-elements', function () {
-        return view('admin.ui-elements');
-    })->name('admin.ui-elements');
  
- 
-
-
  // Group routes that need admin role and authentication
-Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
-    Route::resource('users', UserController::class);
-    Route::resource('roles', RoleController::class);
-    Route::resource('permissions', PermissionController::class);
-});
+
 
 require __DIR__.'/auth.php';
 

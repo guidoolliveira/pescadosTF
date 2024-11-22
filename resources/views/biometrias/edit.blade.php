@@ -1,8 +1,8 @@
 <x-app-layout>
         <h3 class="text-gray-700 text-3xl font-medium">Biometria</h3>
-        <div class="mt-4 flex justify-center">
+        <div class=" flex justify-center">
             <div class=" shadow-lg w-full sm:w-1/2 rounded-lg mt-8">
-                <h2 class="text-xl py-3 rounded-t-lg px-6 text-white bg-gray-800 font-bold">Cadastrar Biometria</h2> 
+                <h2 class="text-xl py-3 rounded-t-lg px-6 text-white bg-gray-800 font-bold">Editar Biometria</h2> 
                 <div class="p-6">
                 <form method="POST" action="{{route('biometrias.update', ['biometria' => $biometria->id])}}" enctype="multipart/form-data">
                     @csrf
@@ -32,11 +32,20 @@
                             <label class="text-gray-700 mb-1" for="date">Data</label>
                             <input class="form-input w-full mt-2 rounded-md focus:border-indigo-600" type="date" name="date" id="date" value="{{$biometria->date}}"  required>
                         </div>
-                        <div class=" col-span-2 flex flex-col">
-                            <label class="text-gray-700 mb-1" for="image">Imagem </label>
-                            <input class="form-input w-full mt-2 rounded-md focus:border-indigo-600" type="file" name="image" value="{{$biometria->image}}" id="image">
-                            
+                        
+                        <div class="col-span-2 flex flex-col justify-center">
+                            <label class="text-gray-700 mb-1" for="image">Imagem ( <small class="py-4">Deixe o campo vazio se não for editar ele</small> )</label>
+                            <input class="form-input w-full mt-2 sm:mt-0 rounded-md focus:border-indigo-600" type="file" name="image" id="image" placeholder="">
                         </div>
+                        
+                        <div class=" col-span-2 flex flex-col">
+                            <div class="mx-auto">
+                            @if ($biometria->image)
+                                <img src="{{ Storage::url($biometria->image) }}" alt="Imagem da biometria" class="h-72 object-cover rounded-md">
+                            @endif
+                        </div>
+                        </div>
+                        
                         <div class=" col-span-2 flex flex-col">
                             <label class="text-gray-700 mb-1" for="description">Observações</label>
                             <textarea class="form-input w-full mt-2 rounded-md focus:border-indigo-600" name="description" required>{{$biometria->description}}</textarea>

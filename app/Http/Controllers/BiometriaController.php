@@ -12,10 +12,7 @@ class BiometriaController extends Controller
     public function index(Request $request)
     {
         $viveiros = Viveiro::all();
-        $biometrias = Biometria::whereIn('id', function ($query) {
-            $query->selectRaw('MAX(id)')->from('biometrias')->whereColumn('biometrias.viveiro_id', 'biometrias.viveiro_id')->whereIn('date', function ($subquery) {
-                    $subquery->selectRaw('MAX(date)')->from('biometrias AS b')->whereColumn('b.viveiro_id', 'biometrias.viveiro_id');})->groupBy('viveiro_id');
-        })->get();
+        $biometrias = Biometria::all();
         return view('biometrias.index', [
             'biometrias' => $biometrias,
             'viveiros' => $viveiros,
@@ -32,14 +29,18 @@ class BiometriaController extends Controller
 
     public function store(Request $request)
     {
+        $imagePath = null;
         if ($request->hasFile('image')) {
+            // Gera um nome único para o arquivo
             $fileName = now()->format('Ymd_His') . '.' . $request->image->extension();
+            // Armazena o arquivo na pasta 'images' no diretório público
             $imagePath = $request->file('image')->storeAs('images', $fileName, 'public');
         }
+
         $shrimp_weight = round($request->input('weight') / $request->input('quantity'), 2);
 
         Biometria::create([
-           'weight' => $request->input("weight"),
+            'weight' => $request->input("weight"),
             'quantity' => $request->input("quantity"),
             'date' => $request->input("date"),
             'description' => $request->input("description"),
@@ -50,12 +51,12 @@ class BiometriaController extends Controller
 
         return redirect()->route('biometrias.index')->with('success', 'Biometria criada com sucesso.');
     }
+
     public function show($id)   
     {
         $biometria = Biometria::with('viveiro')->findOrFail($id); 
         return view('biometrias.show', compact('biometria'));
     }
-
 
     public function edit(Biometria $biometria)
     {
@@ -70,14 +71,15 @@ class BiometriaController extends Controller
     {
         $imagePath = $biometria->image;
         if ($request->hasFile('image')) {
+            // Remove a imagem antiga, se houver
             if ($biometria->image) {
                 Storage::disk('public')->delete($biometria->image);
             }
 
+            // Armazena a nova imagem
             $imagePath = $request->file('image')->store('images', 'public');
-        } else {
-            $imagePath = $biometria->image;
         }
+
         $shrimp_weight = round($request->weight / $request->quantity, 2);
         $biometria->update([
             'weight' => $request->input("weight"),
@@ -94,6 +96,7 @@ class BiometriaController extends Controller
 
     public function destroy(Biometria $biometria)
     {
+        // Apaga a imagem associada, se houver
         if ($biometria->image) {
             Storage::disk('public')->delete($biometria->image);
         }

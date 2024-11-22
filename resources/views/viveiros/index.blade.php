@@ -33,7 +33,7 @@
                         <th class="py-3 px-5 bg-gray-900 font-medium uppercase text-sm text-gray-100">Área</th>
                         <th class="py-3 px-5 bg-gray-900 font-medium uppercase text-sm text-gray-100">Última Biometria</th>
                         <th class="py-3 px-5 bg-gray-900 font-medium uppercase text-sm text-gray-100">Data Biometria</th>
-                        <th class="py-3 px-5 bg-gray-900 font-medium uppercase text-sm text-gray-100">Status</th>
+
                         <th class="py-3 px-5 bg-gray-900 font-medium uppercase text-sm text-gray-100">Ações</th>
                     </tr>
                 </thead>
@@ -42,12 +42,22 @@
                         <tr class="hover:bg-gray-200">
                             <td class="py-4 px-6 border-b text-gray-800 text-lg">{{ $v->name }}</td>
                             <td class="py-4 px-6 border-b text-gray-600">{{ $v->area/10000 }}ha</td>
-                            <td class="py-4 px-6 border-b text-gray-600">{{ $v->gramatura . 'g' ?? 'Sem biometria'}}</td>
+                            <td class="py-4 px-6 border-b text-gray-600">
+                                @if ( $v->gramatura == 0)
+                                    Sem biometria
+                                @else 
+                                    {{ $v->gramatura . 'g'}}
+                                @endif
+                            </td>
                             <td class="py-4 px-6 border-b text-gray-600">{{ $v->date ?? 'Sem biometria'}}</td>
-                            <td class="py-4 px-6 border-b text-gray-600">{{ $v->date }}</td>
-                            <td class="py-4 px-6 border-b whitespace-nowrap">
-                                <a class="text-blue-600 hover:text-blue-800 mr-4" href="{{ route('viveiros.show', ['viveiro' => $v->id]) }}">Exibir</a> 
-                            </td>                            
+                            <td class="py-4 px- border-b whitespace-nowrap">
+                                <a class="text-blue-600 hover:text-blue-800 mr-4" href="{{ route('viveiros.edit', ['viveiro' => $v->id]) }}">Editar</a> 
+                                <form class="inline" action="{{ route('viveiros.destroy', ['viveiro' => $v->id]) }}" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir este viveiro?');">
+                                    @csrf
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <button type="submit" class="text-red-600 hover:text-red-800">Excluir</button>
+                                </form>
+                            </td>                             
                         </tr>
                     @endforeach
                 </tbody>
