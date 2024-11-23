@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreUpdateViveiro;
 use App\Models\Biometria;
 use App\Models\Viveiro;
 use Illuminate\Http\Request;
@@ -39,13 +40,13 @@ class ViveiroController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreUpdateViveiro $request)
     {
         $created = $this->viveiro->create([
-            'name' => $request->input('name'),
-            'width' => $request->input('width'),
-            'length' => $request->input('length'),
-            'area' => $request->input('width') * $request->input('length')
+            'name' => $request->input('nome'),
+            'width' => $request->input('largura'),
+            'length' => $request->input('comprimento'),
+            'area' => $request->input('largura') * $request->input('comprimento')
         ]);
         if($created){
             return redirect()->route("viveiros.index")->with('success', 'Viveiro Cadastrado com Sucesso' );
@@ -89,9 +90,12 @@ class ViveiroController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(StoreUpdateViveiro $request, string $id)
     {
-        $updated = $this->viveiro->where('id', $id)->update($request->except('_token', '_method'));
+        $updated = $this->viveiro->where('id', $id)->update(['name' => $request->input('nome'),
+            'width' => $request->input('largura'),
+            'length' => $request->input('comprimento'),
+            'area' => $request->input('largura') * $request->input('comprimento')], $request->except('_token', '_method'));
         if($updated){
             return redirect()->route("viveiros.index")->with('success', 'Viveiro Editado com Sucesso' );
         }

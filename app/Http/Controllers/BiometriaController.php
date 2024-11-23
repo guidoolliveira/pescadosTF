@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreUpdateBiometria;
 use App\Models\Biometria;
 use App\Models\Viveiro;
 use Illuminate\Http\Request;
@@ -27,7 +28,7 @@ class BiometriaController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(StoreUpdateBiometria $request)
     {
         $imagePath = null;
         if ($request->hasFile('image')) {
@@ -37,13 +38,13 @@ class BiometriaController extends Controller
             $imagePath = $request->file('image')->storeAs('images', $fileName, 'public');
         }
 
-        $shrimp_weight = round($request->input('weight') / $request->input('quantity'), 2);
+        $shrimp_weight = round($request->input('peso') / $request->input('quantidade'), 2);
 
         Biometria::create([
-            'weight' => $request->input("weight"),
-            'quantity' => $request->input("quantity"),
-            'date' => $request->input("date"),
-            'description' => $request->input("description"),
+            'weight' => $request->input("peso"),
+            'quantity' => $request->input("quantidade"),
+            'date' => $request->input("data"),
+            'description' => $request->input("observacao"),
             'image' => $imagePath,
             'viveiro_id' => $request->input("viveiro_id"),
             'shrimp_weight' => $shrimp_weight
@@ -67,25 +68,22 @@ class BiometriaController extends Controller
         ]);
     }
 
-    public function update(Request $request, Biometria $biometria)
+    public function update(StoreUpdateBiometria $request, Biometria $biometria)
     {
         $imagePath = $biometria->image;
         if ($request->hasFile('image')) {
-            // Remove a imagem antiga, se houver
             if ($biometria->image) {
                 Storage::disk('public')->delete($biometria->image);
             }
-
-            // Armazena a nova imagem
             $imagePath = $request->file('image')->store('images', 'public');
         }
 
-        $shrimp_weight = round($request->weight / $request->quantity, 2);
+        $shrimp_weight = round($request->input('peso') / $request->input('quantidade'), 2);
         $biometria->update([
-            'weight' => $request->input("weight"),
-            'quantity' => $request->input("quantity"),
-            'date' => $request->input("date"),
-            'description' => $request->input("description"),
+            'weight' => $request->input("peso"),
+            'quantity' => $request->input("quantidade"),
+            'date' => $request->input("data"),
+            'description' => $request->input("observacao"),
             'image' => $imagePath,
             'viveiro_id' => $request->input("viveiro_id"),
             'shrimp_weight' => $shrimp_weight
@@ -96,7 +94,6 @@ class BiometriaController extends Controller
 
     public function destroy(Biometria $biometria)
     {
-        // Apaga a imagem associada, se houver
         if ($biometria->image) {
             Storage::disk('public')->delete($biometria->image);
         }

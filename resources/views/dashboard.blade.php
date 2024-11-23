@@ -15,23 +15,32 @@
                </a>
             </div>
             <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
-              @foreach ($lowestQuantityProducts as $p)
-              <li class="py-3 sm:py-4">
-                <div class="flex items-center justify-between">
-                  <div class="flex items-center min-w-0">
-                    <div class="ml-3">
-                      <p class="font-medium text-gray-900 truncate dark:text-white">
-                        {{$p->name}}
-                      </p>
-                    </div>
-                  </div>
-                  <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                    {{$p->quantity}}
-                  </div>
-                </div>
-              </li>       
-              @endforeach      
-            </ul>
+              @if ($lowestQuantityProducts->isEmpty())
+                  <li class="py-3 sm:py-4">
+                    <div class="text-center text-gray-500 font-semibold dark:text-gray-400">
+                      Nenhum produto cadastrado.
+                  </div>                  
+                  </li>
+              @else
+                  @foreach ($lowestQuantityProducts as $p)
+                      <li class="py-3 sm:py-4">
+                          <div class="flex items-center justify-between">
+                              <div class="flex items-center min-w-0">
+                                  <div class="ml-3">
+                                      <p class="font-medium text-gray-900 truncate dark:text-white">
+                                          {{ $p->name }}
+                                      </p>
+                                  </div>
+                              </div>
+                              <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                                  {{ $p->quantity }}
+                              </div>
+                          </div>
+                      </li>
+                  @endforeach
+              @endif
+          </ul>
+          
           </div>
           <!--Tabs widget -->
           <div class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800">

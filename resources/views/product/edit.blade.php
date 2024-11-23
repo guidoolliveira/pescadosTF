@@ -9,22 +9,22 @@
                 <input type="hidden" name="_method" value="PUT" >
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div class="flex flex-col">
-                        <label class="text-gray-700 mb-1" for="name">Nome</label>
-                        <input class="form-input w-full mt-2 rounded-md focus:border-indigo-600" type="text" name="name" value="{{$product->name}}" required>
+                        <label class="text-gray-700 mb-1" for="name">Nome*</label>
+                        <input class="form-input w-full mt-2 rounded-md focus:border-indigo-600" type="text" name="nome" value="{{$product->name}}" required>
                     </div>
 
                     <div class="flex flex-col">
-                        <label class="text-gray-700 mb-1" for="quantity">Quantidade</label>
-                        <input class="form-input w-full mt-2 rounded-md focus:border-indigo-600" type="number" name="quantity" value="{{$product->quantity}}" required>
+                        <label class="text-gray-700 mb-1" for="quantity">Quantidade*</label>
+                        <input class="form-input w-full mt-2 rounded-md focus:border-indigo-600" type="number" name="quantidade" value="{{$product->quantity}}" required>
                     </div>
 
                     <div class="flex flex-col">
-                        <label class="text-gray-700 mb-1" for="validity">Lote</label>
-                        <input class="form-input w-full mt-2 rounded-md focus:border-indigo-600" type="date" name="validity" value="{{$product->lot}}" required>
+                        <label class="text-gray-700 mb-1" for="validity">Lote*</label>
+                        <input class="form-input w-full mt-2 rounded-md focus:border-indigo-600" type="date" name="lote" value="{{$product->lot}}" required>
                     </div>
                     <div class="flex flex-col">
-                        <label class="text-gray-700 mb-1" for="validity">Data de Validade</label>
-                        <input class="form-input w-full mt-2 rounded-md focus:border-indigo-600" type="date" name="validity" value="{{$product->validity}}" required>
+                        <label class="text-gray-700 mb-1" for="validity">Data de Validade*</label>
+                        <input class="form-input w-full mt-2 rounded-md focus:border-indigo-600" type="date" name="validade" value="{{$product->validity}}" required>
                     </div>
                 </div>
 

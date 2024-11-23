@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreUpdateEstoque;
 use Illuminate\Http\Request;
 use App\Models\Product;
 
@@ -30,13 +31,13 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreUpdateEstoque $request)
     {
         $created = $this->product->create([
-            'name' => $request->input('name'),
-            'quantity' => $request->input('quantity'),
-            'lot' => $request->input('lot'),
-            'validity' => $request->input('validity')
+            'name' => $request->input('nome'),
+            'quantity' => $request->input('quantidade'),
+            'lot' => $request->input('lote'),
+            'validity' => $request->input('validade')
         ]);
         if($created){
             return redirect()->route("products.index")->with('success', 'Produto Cadastrado com Sucesso' );
@@ -64,9 +65,14 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(StoreUpdateEstoque $request, string $id)
     {
-        $updated = $this->product->where('id', $id)->update($request->except('_token', '_method'));
+        $updated = $this->product->where('id', $id)->update([
+            'name' => $request->input('nome'),
+            'quantity' => $request->input('quantidade'),
+            'lot' => $request->input('lote'),
+            'validity' => $request->input('validade')
+        ], $request->except('_token', '_method'));
         if($updated){
             return redirect()->route("products.index")->with('success', 'Produto Editado com Sucesso' );
         }
