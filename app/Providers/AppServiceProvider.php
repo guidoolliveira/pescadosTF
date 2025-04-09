@@ -23,7 +23,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Builder::defaultStringLength(125);
-        View::share('outOfStockProducts', Product::where('quantity', 0)->get());
+         Builder::defaultStringLength(125);
+         View::share('outOfStockProducts', Product::where('quantity', 0)->get());
     }
 }

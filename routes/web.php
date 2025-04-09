@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FuncionarioController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\BiometriaController;
 use App\Http\Controllers\SiteController;
@@ -10,6 +11,8 @@ use App\Http\Controllers\ViveiroController;
 
 Route::get('/', [SiteController::class, 'index'])->middleware(['auth', 'verified'])->name('index');
 Route::middleware('auth')->group(function () {
+    
+
     Route::get('/produtos', [ProductController::class, 'index'])->name('products.index');
     Route::get('/produtos/cadastrar', [ProductController::class, 'create'])->name('products.create');
     Route::post('/produtos', [ProductController::class, 'store'])->name('products.store');
@@ -18,6 +21,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/produtos/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
 
     Route::resource('biometrias', BiometriaController::class);
+    Route::resource('funcionarios', FuncionarioController::class);
     Route::resource('viveiros', ViveiroController::class);
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
