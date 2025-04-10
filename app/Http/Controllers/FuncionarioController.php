@@ -57,9 +57,9 @@ class FuncionarioController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Funcionario $funcionarios)
+    public function edit(Funcionario $funcionario)
     {
-        return view("funcionarios.edit", ["funcionarios" => $funcionarios]);
+        return view("funcionarios.edit", ["funcionario" => $funcionario]);
     }
 
     /**
@@ -84,6 +84,7 @@ class FuncionarioController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $this->funcionario->where('id', $id)->delete();
+        return redirect()->route("funcionarios.index")->with('success', 'Funcionário deletado com Sucesso' );
     }
 }

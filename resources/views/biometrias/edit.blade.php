@@ -80,7 +80,7 @@
                     </div>
     
                     <div class="flex justify-end mt-6">
-                        <a href="{{route("biometrias.index")}}" class="py-2 px-4 leading-tight border border-gray-200 text-blue-700 rounded-l mr-4">Voltar</a>
+                        <a href="{{route('biometrias.index')}}" class="py-2 px-4 leading-tight border border-gray-200 text-blue-700 rounded-l mr-4">Voltar</a>
                         <button type="submit" class="px-6 py-2 bg-gray-800 text-gray-200 rounded-md hover:bg-gray-700 focus:outline-none focus:bg-gray-700">Editar</button>
                     </div>
                 </form>
