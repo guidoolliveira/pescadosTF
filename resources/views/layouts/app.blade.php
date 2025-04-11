@@ -18,6 +18,7 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         
+        
     </head>
     <body>
         <div x-data="{ sidebarOpen: false }" class="flex h-screen bg-gray-200 font-roboto">
@@ -34,5 +35,15 @@
             </div>
         </div>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/jquery.inputmask.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/cleave.js@1/dist/cleave.min.js"></script>
+
+        <script>
+            
+      
+            
+            </script>
+
     </body>
 </html>

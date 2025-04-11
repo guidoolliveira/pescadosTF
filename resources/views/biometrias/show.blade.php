@@ -53,6 +53,9 @@
         </div>
     
         <div class="mt-6 flex justify-end space-x-4">
+            <a href="{{ route('biometrias.edit', $biometria->id) }}" class="text-blue-600 hover:text-blue-800 px-4 py-2 border border-blue-500 rounded-lg transition-colors duration-300">
+                Editar
+            </a>
             <form action="{{ route('biometrias.destroy', $biometria->id) }}" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir esta biometria?');">
                 @csrf
                 @method('DELETE')
@@ -60,9 +63,6 @@
                     Excluir
                 </button>
             </form>
-            <a href="{{ route('biometrias.edit', $biometria->id) }}" class="text-blue-600 hover:text-blue-800 px-4 py-2 border border-blue-500 rounded-lg transition-colors duration-300">
-                Editar
-            </a>
         </div>
     </div>
     

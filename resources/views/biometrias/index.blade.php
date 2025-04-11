@@ -55,7 +55,7 @@
                                 <th class="py-3 px-5 bg-gray-900 font-medium uppercase text-sm text-gray-100">Viveiro</th>
                                 <th class="py-3 px-5 bg-gray-900 font-medium uppercase text-sm text-gray-100">Data da Biometria</th>
                                 <th class="py-3 px-5 bg-gray-900 font-medium uppercase text-sm text-gray-100">Gramatura</th>
-                                <th class="py-3 px-5 bg-gray-900 font-medium uppercase text-sm text-gray-100"></th>
+                                <th class="py-3 px-5 bg-gray-900 font-medium uppercase text-sm text-gray-100">Ações</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -65,7 +65,7 @@
                                     <td class="py-4 px-6 border-b text-gray-600">{{ date('d/m/Y', strtotime($b->date )) }}</td>
                                     <td class="py-4 px-6 border-b text-gray-600">{{ $b->shrimp_weight }}g</td>
                                     <td class="py-4 border-b whitespace-nowrap">
-                                        <a class="text-blue-600 hover:text-blue-800 mr-4" href="{{ route('biometrias.show', ['biometria' => $b->id]) }}">Exibir</a> 
+                                        <a class="text-blue-600 hover:text-blue-800 mr-4" href="{{ route('biometrias.show', ['biometria' => $b->id]) }}">Exibir detalhes</a> 
                                     </td>                            
                                 </tr>
                             @endforeach

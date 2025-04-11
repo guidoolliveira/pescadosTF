@@ -46,9 +46,9 @@
                     @foreach ($funcionarios as $f)
                         <tr class="hover:bg-gray-200">
                             <td class="py-4 px-6 border-b text-gray-800 text-lg">{{ $f->name }}</td>
-                            <td class="py-4 px-6 border-b text-gray-600">{{ $f->phone }}</td>
+                            <td class="py-4 px-6 border-b text-gray-600">{{ preg_replace('/(\d{2})(\d{5})(\d{4})/', '($1) $2-$3', $f->phone) }}</td>
                             <td class="py-4 px-6 border-b text-gray-600">{{ $f->function }}</td>
-                            <td class="py-4 px-6 border-b text-gray-600">{{ $f->salary }}</td>
+                            <td class="py-4 px-6 border-b text-gray-600">R$ {{ number_format($f->salary, 2, ',', '.') }}</td>
                             <td class="py-4 px- border-b whitespace-nowrap">
                                 <a class="text-blue-600 hover:text-blue-800 mr-4" href="{{ route('funcionarios.edit', ['funcionario' => $f->id]) }}">Editar</a> 
                                 <form class="inline" action="{{ route('funcionarios.destroy', ['funcionario' => $f->id]) }}" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir este funcionário?');">

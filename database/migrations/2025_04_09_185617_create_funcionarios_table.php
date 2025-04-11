@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('phone');
             $table->string('function');
-            $table->decimal('salary');
+            $table->decimal('salary', 10, 2);
         });
     }
 
