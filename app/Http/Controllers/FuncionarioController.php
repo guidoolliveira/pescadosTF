@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
 use App\Models\Funcionario;
+use App\Http\Requests\StoreUpdateFuncionario;
 
 class FuncionarioController extends Controller
 {
@@ -32,8 +34,7 @@ class FuncionarioController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
+    public function store(StoreUpdateFuncionario $request){
         $created = $this->funcionario->create([
             'name' => $request->input('nome'),
             'salary' => $request->input('salario'),
@@ -65,7 +66,7 @@ class FuncionarioController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(StoreUpdateFuncionario $request, string $id)
     {
         $updated = $this->funcionario->where('id', $id)->update([
             'name' => $request->input('nome'),
