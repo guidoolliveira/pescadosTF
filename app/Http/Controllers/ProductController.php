@@ -37,6 +37,7 @@ class ProductController extends Controller
             'name' => $request->input('nome'),
             'quantity' => $request->input('quantidade'),
             'lot' => $request->input('lote'),
+            'weight' => $request->input('peso'),
             'validity' => $request->input('validade')
         ]);
         if($created){
@@ -71,6 +72,7 @@ class ProductController extends Controller
             'name' => $request->input('nome'),
             'quantity' => $request->input('quantidade'),
             'lot' => $request->input('lote'),
+            'weight' => $request->input('peso'),
             'validity' => $request->input('validade')
         ], $request->except('_token', '_method'));
         if($updated){

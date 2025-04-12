@@ -16,6 +16,7 @@ return new class extends Migration
             $table->timestamps();
             $table->string('name');
             $table->integer('quantity');
+            $table->integer('weight');
             $table->date('validity');
             $table->date('lot');
         });

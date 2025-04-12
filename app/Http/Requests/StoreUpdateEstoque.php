@@ -24,6 +24,7 @@ class StoreUpdateEstoque extends FormRequest
         return [
             'nome' => 'required|string|max:255', 
             'quantidade' => 'required|numeric|gt:0|digits_between:1, 4',
+            'peso' => 'required|numeric|gt:0|digits_between:1, 2',
             'lote' => 'required|date|date_format:Y-m-d',
             'validade' => 'required|date|date_format:Y-m-d'
         ];

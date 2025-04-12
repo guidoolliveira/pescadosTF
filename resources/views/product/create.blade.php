@@ -9,7 +9,7 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div class="flex flex-col">
                             <label class="text-gray-700 mb-1" for="name">Nome*</label>
-                            <input class="form-input w-full mt-2 rounded-md focus:border-indigo-600" type="text" name="nome" value="{{ old('nome') }}" required>
+                            <input class="form-input w-full mt-2 rounded-md focus:border-indigo-600 @error('nome') border-red-500 @enderror" type="text" name="nome" value="{{ old('nome') }}" required>
                             @error('nome')
                                 <span class="text-red-600 text-sm mt-1">{{ $message }}</span>
                             @enderror
@@ -17,15 +17,22 @@
 
                         <div class="flex flex-col">
                             <label class="text-gray-700 mb-1" for="quantity">Quantidade*</label>
-                            <input class="form-input w-full mt-2 rounded-md focus:border-indigo-600" type="number" name="quantidade" value="{{ old('quantidade') }}" required>
+                            <input class="form-input w-full mt-2 rounded-md focus:border-indigo-600 @error('quantidade') border-red-500 @enderror" type="number" name="quantidade" value="{{ old('quantidade') }}" required>
                             @error('quantidade')
+                                <span class="text-red-600 text-sm mt-1">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="flex flex-col">
+                            <label class="text-gray-700 mb-1" for="peso">Peso da unidade (kg)*</label>
+                            <input class="form-input w-full mt-2 rounded-md focus:border-indigo-600 @error('peso') border-red-500 @enderror" type="number" name="peso" value="{{ old('peso') }}" required>
+                            @error('peso')
                                 <span class="text-red-600 text-sm mt-1">{{ $message }}</span>
                             @enderror
                         </div>
 
                         <div class="flex flex-col">
                             <label class="text-gray-700 mb-1" for="lote">Lote*</label>
-                            <input class="form-input w-full mt-2 rounded-md focus:border-indigo-600" type="date" name="lote" value="{{ old('lote') }}" required>
+                            <input class="form-input w-full mt-2 rounded-md focus:border-indigo-600 @error('lote') border-red-500 @enderror" type="date" name="lote" value="{{ old('lote') }}" required>
                             @error('lote')
                                 <span class="text-red-600 text-sm mt-1">{{ $message }}</span>
                             @enderror
@@ -33,7 +40,7 @@
 
                         <div class="flex flex-col">
                             <label class="text-gray-700 mb-1" for="validade">Data de Validade*</label>
-                            <input class="form-input w-full mt-2 rounded-md focus:border-indigo-600" type="date" name="validade" value="{{ old('validade') }}" required>
+                            <input class="form-input w-full mt-2 rounded-md focus:border-indigo-600 @error('validade') border-red-500 @enderror" type="date" name="validade" value="{{ old('validade') }}" required>
                             @error('validade')
                                 <span class="text-red-600 text-sm mt-1">{{ $message }}</span>
                             @enderror

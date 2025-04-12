@@ -10,7 +10,6 @@
                     @method('PUT')
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                        {{-- Nome --}}
                         <div class="flex flex-col">
                             <label class="text-gray-700 mb-1" for="nome">Nome*</label>
                             <input class="form-input w-full mt-2 rounded-md focus:border-indigo-600 @error('nome') border-red-500 @enderror"
@@ -19,8 +18,6 @@
                                 <span class="text-sm text-red-600 mt-1">{{ $message }}</span>
                             @enderror
                         </div>
-
-                        {{-- Quantidade --}}
                         <div class="flex flex-col">
                             <label class="text-gray-700 mb-1" for="quantidade">Quantidade*</label>
                             <input class="form-input w-full mt-2 rounded-md focus:border-indigo-600 @error('quantidade') border-red-500 @enderror"
@@ -29,8 +26,14 @@
                                 <span class="text-sm text-red-600 mt-1">{{ $message }}</span>
                             @enderror
                         </div>
-
-                        {{-- Lote --}}
+                        <div class="flex flex-col">
+                            <label class="text-gray-700 mb-1" for="quantidade">Peso da unidade (kg)*</label>
+                            <input class="form-input w-full mt-2 rounded-md focus:border-indigo-600 @error('peso') border-red-500 @enderror"
+                                   type="number" name="quantidade" value="{{ old('peso', $product->weight) }}" required>
+                            @error('peso')
+                                <span class="text-sm text-red-600 mt-1">{{ $message }}</span>
+                            @enderror
+                        </div>
                         <div class="flex flex-col">
                             <label class="text-gray-700 mb-1" for="lote">Lote*</label>
                             <input class="form-input w-full mt-2 rounded-md focus:border-indigo-600 @error('lote') border-red-500 @enderror"
@@ -40,7 +43,6 @@
                             @enderror
                         </div>
 
-                        {{-- Validade --}}
                         <div class="flex flex-col">
                             <label class="text-gray-700 mb-1" for="validade">Data de Validade*</label>
                             <input class="form-input w-full mt-2 rounded-md focus:border-indigo-600 @error('validade') border-red-500 @enderror"
