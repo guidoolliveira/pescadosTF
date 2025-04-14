@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
 use App\Models\Viveiro;
-use App\Models\Biometria;
+use App\Models\Funcionario;
 
 class SiteController extends Controller
 {
@@ -27,14 +27,14 @@ class SiteController extends Controller
         $products = Product::all();
         $lowestQuantityProducts = Product::orderBy('quantity', 'asc')->take(3)->get();
         $totalViveiros = Viveiro::count();
-        $totalBiometrias = Biometria::count();
+        $totalFuncionarios = Funcionario::count();
 
     return view('dashboard', [
         'viveiros' => $viveiros,
         'products' => $products,
         'lowestQuantityProducts' => $lowestQuantityProducts,
         'totalViveiros' => $totalViveiros,
-        'totalBiometrias' => $totalBiometrias,
+        'totalFuncionarios' => $totalFuncionarios,
         'totalProducts' => $products->count()
     ]);
     }
