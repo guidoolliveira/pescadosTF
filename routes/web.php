@@ -5,8 +5,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FuncionarioController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\BiometriaController;
+use App\Http\Controllers\CultivoController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\ViveiroController;
+use App\Http\Controllers\UsoDiarioController;
 
 
 Route::get('/', [SiteController::class, 'index'])->middleware(['auth', 'verified'])->name('index');
@@ -20,7 +22,15 @@ Route::middleware('auth')->group(function () {
     Route::put('/produtos/{product}', [ProductController::class, 'update'])->name('products.update');
     Route::delete('/produtos/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
 
+    Route::resource('cultivos', CultivoController::class);
+    Route::get('cultivos/{cultivo}/relatorio', [CultivoController::class, 'relatorio'])->name('cultivos.relatorio');
+    Route::get('cultivos/{cultivo}/relatorio', [CultivoController::class, 'finalizar'])->name('cultivos.finalizar');
+
+
+    Route::resource('uso_diario', UsoDiarioController::class);
+
     Route::resource('biometrias', BiometriaController::class);
+
     Route::resource('funcionarios', FuncionarioController::class);
     Route::resource('viveiros', ViveiroController::class);
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
