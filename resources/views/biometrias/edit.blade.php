@@ -10,7 +10,6 @@
                     @method('PUT')
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                        {{-- Peso --}}
                         <div class="flex flex-col">
                             <label class="text-gray-700 mb-1" for="weight">Peso* (g)</label>
                             <input class="form-input w-full mt-2 rounded-md focus:border-indigo-600 @error('peso') border-red-500 @enderror" 
@@ -20,7 +19,6 @@
                             @enderror
                         </div>
 
-                        {{-- Quantidade --}}
                         <div class="flex flex-col">
                             <label class="text-gray-700 mb-1" for="quantidade">Quantidade de Camarões*</label>
                             <input class="form-input w-full mt-2 rounded-md focus:border-indigo-600 @error('quantidade') border-red-500 @enderror" 
@@ -30,7 +28,6 @@
                             @enderror
                         </div>
 
-                        {{-- Viveiro --}}
                         <div class="flex flex-col">
                             <label class="text-gray-700 mb-1" for="viveiro_id">Viveiro*</label>
                             <select name="viveiro_id" id="viveiro_id" class="form-input w-full mt-2 rounded-md focus:border-indigo-600 @error('viveiro_id') border-red-500 @enderror">
@@ -44,8 +41,6 @@
                                 <span class="text-sm text-red-600 mt-1">{{ $message }}</span>
                             @enderror
                         </div>
-
-                        {{-- Data --}}
                         <div class="flex flex-col">
                             <label class="text-gray-700 mb-1" for="date">Data*</label>
                             <input class="form-input w-full mt-2 rounded-md focus:border-indigo-600 @error('data') border-red-500 @enderror"
@@ -55,7 +50,6 @@
                             @enderror
                         </div>
 
-                        {{-- Imagem --}}
                         <div class="col-span-2 flex flex-col justify-center">
                             <label class="text-gray-700 mb-1" for="image">Imagem 
                                 <small class="text-gray-500">(Deixe o campo vazio se não for editar)</small>
@@ -67,7 +61,6 @@
                             @enderror
                         </div>
 
-                        {{-- Preview da Imagem --}}
                         <div class="col-span-2 flex flex-col">
                             <div class="mx-auto">
                                 @if ($biometria->image)
@@ -76,7 +69,6 @@
                             </div>
                         </div>
 
-                        {{-- Observações --}}
                         <div class="col-span-2 flex flex-col">
                             <label class="text-gray-700 mb-1" for="description">Observações*</label>
                             <textarea class="form-input w-full mt-2 rounded-md focus:border-indigo-600 @error('observacao') border-red-500 @enderror" 
