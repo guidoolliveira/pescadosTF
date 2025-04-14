@@ -19,5 +19,8 @@ class Viveiro extends Model
     {
         return $this->hasMany(Biometria::class);
     }
-    
+    public function cultivos()
+    {
+        return $this->hasMany(Cultivo::class);
+    }
 }
