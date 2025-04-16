@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreUpdateEstoque;
+
+use App\Http\Requests\StoreUpdateProduto;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Estoque;
 
 class ProductController extends Controller
 {
@@ -13,11 +15,22 @@ class ProductController extends Controller
     {
         $this->product = new Product();
     }
+
     public function index()
-    {
-        $products = Product::all();
-        return view("product.index", ['products' => $products]);
-    }
+{
+    $products = Product::all();
+    foreach ($products as $product) {
+            $product->estoque = $product->estoque()
+                ->orderBy('validity')
+                ->orderBy('created_at')
+                ->get();
+
+            foreach ($product->estoque as $e) {
+                $e->historico = $e->historico()->get();
+            }
+        }
+    return view("product.index", ['products' => $products]);
+}
 
     /**
      * Show the form for creating a new resource.
@@ -31,21 +44,30 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreUpdateEstoque $request)
-    {
-        $created = $this->product->create([
-            'name' => $request->input('nome'),
-            'quantity' => $request->input('quantidade'),
-            'lot' => $request->input('lote'),
-            'weight' => $request->input('peso'),
-            'validity' => $request->input('validade')
-        ]);
-        if($created){
-            return redirect()->route("products.index")->with('success', 'Produto Cadastrado com Sucesso' );
-        }
-        return redirect()->back()->with('message', 'Erro ao cadastrar' );
+    public function store(StoreUpdateProduto  $request)
+{
+    
+    $product = $this->product->create([
+        'name'   => $request->input('nome'),
+        'weight' => $request->input('peso'),
+    ]);
 
+    if ($product) {
+        $estoque = new Estoque();
+        $estoque->product_id = $product->id; 
+        $estoque->quantity   = $request->input('quantidade');
+        $estoque->lot        = $request->input('lote');
+        $estoque->validity   = $request->input('validade');
+        
+        if ($estoque->save()) {
+            return redirect()->route('products.index')
+                             ->with('success', 'Produto e entrada de estoque cadastrados com sucesso!');
+        }
+        return redirect()->back()->with('message', 'Produto criado, mas erro ao adicionar entrada no estoque!');
     }
+
+    return redirect()->back()->with('message', 'Erro ao cadastrar produto!');
+}
 
     /**
      * Display the specified resource.
@@ -66,14 +88,11 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(StoreUpdateEstoque $request, string $id)
+    public function update(StoreUpdateProduto $request, string $id)
     {
         $updated = $this->product->where('id', $id)->update([
             'name' => $request->input('nome'),
-            'quantity' => $request->input('quantidade'),
-            'lot' => $request->input('lote'),
             'weight' => $request->input('peso'),
-            'validity' => $request->input('validade')
         ], $request->except('_token', '_method'));
         if($updated){
             return redirect()->route("products.index")->with('success', 'Produto Editado com Sucesso' );
