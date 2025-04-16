@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreUpdateBiometria;
 use App\Models\Biometria;
 use App\Models\Viveiro;
+use App\Models\Cultivo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -32,13 +33,19 @@ class BiometriaController extends Controller
     {
         $imagePath = null;
         if ($request->hasFile('image')) {
-            // Gera um nome único para o arquivo
             $fileName = now()->format('Ymd_His') . '.' . $request->image->extension();
-            // Armazena o arquivo na pasta 'images' no diretório público
             $imagePath = $request->file('image')->storeAs('images', $fileName, 'public');
         }
 
         $shrimp_weight = round($request->input('peso') / $request->input('quantidade'), 2);
+
+        $viveiro = Viveiro::find($request->input("viveiro_id"));
+
+        $cultivoAtivo = $viveiro->cultivo_ativo;
+    
+        if (!$cultivoAtivo) {
+            return redirect()->back()->withInput()->with('message', 'Erro ao cadastrar: Não há cultivo ativo no viveiro selecionado.');
+        }
 
         Biometria::create([
             'weight' => $request->input("peso"),
@@ -47,6 +54,7 @@ class BiometriaController extends Controller
             'description' => $request->input("observacao"),
             'image' => $imagePath,
             'viveiro_id' => $request->input("viveiro_id"),
+            'cultivo_id' => $cultivoAtivo->id,
             'shrimp_weight' => $shrimp_weight
         ]);
 
@@ -77,6 +85,13 @@ class BiometriaController extends Controller
             }
             $imagePath = $request->file('image')->store('images', 'public');
         }
+        $viveiro = Viveiro::find($request->input("viveiro_id"));
+
+        $cultivoAtivo = $viveiro->cultivo_ativo;
+    
+        if (!$cultivoAtivo) {
+            return redirect()->back()->withInput()->with('message', 'Erro ao cadastrar: Não há cultivo ativo no viveiro selecionado.');
+        }
 
         $shrimp_weight = round($request->input('peso') / $request->input('quantidade'), 2);
         $biometria->update([
@@ -86,6 +101,7 @@ class BiometriaController extends Controller
             'description' => $request->input("observacao"),
             'image' => $imagePath,
             'viveiro_id' => $request->input("viveiro_id"),
+            'cultivo_id' => $cultivoAtivo->id,
             'shrimp_weight' => $shrimp_weight
         ]);
 

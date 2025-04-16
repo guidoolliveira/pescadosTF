@@ -22,7 +22,7 @@ class Cultivo extends Model
         return $this->belongsTo(Viveiro::class);
     }
 
-    public function usosDiarios()
+    public function usoDiarios()
     {
         return $this->hasMany(UsoDiario::class);
     }
