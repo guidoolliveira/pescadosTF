@@ -28,10 +28,15 @@
     <a class="" href="{{ route('products.create') }}">
         <button class="px-4 py-2 bg-gray-600 rounded-md text-white font-medium tracking-wide hover:bg-gray-500">Cadastrar</button>
     </a>
-    <a class="" href="{{ route('estoque.create') }}">
-        <button class="px-4 py-2 bg-blue-600 rounded-md text-white font-medium tracking-wide hover:bg-blue-500">Adicionar Entrada</button>
-    </a>
     
+    @if ($products->isNotEmpty())
+        <a href="{{ route('estoque.create') }}">
+            <button class="px-4 py-2 bg-blue-600 rounded-md text-white font-medium tracking-wide hover:bg-blue-500">
+                Adicionar Entrada
+            </button>
+        </a>
+    @endif
+
 </div>
 @if ($products->isNotEmpty())
     <div class="bg-white shadow rounded-md overflow-hidden my-6">
