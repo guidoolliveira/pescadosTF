@@ -37,7 +37,7 @@ class StoreUpdateFuncionario extends FormRequest
         return [
             'nome' => 'required|string|max:255', 
             'telefone' => 'required|phone:BR',
-            'salario' => 'required|numeric|min:0|max:99999.99',
+            'salario' => 'required|numeric|min:1|max:99999.99',
             'funcao' => 'required|string|max:255'
         ];
     }
