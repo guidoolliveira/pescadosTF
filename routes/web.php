@@ -6,6 +6,7 @@ use App\Http\Controllers\FuncionarioController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\BiometriaController;
 use App\Http\Controllers\CultivoController;
+use App\Http\Controllers\EstoqueController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\ViveiroController;
 use App\Http\Controllers\UsoDiarioController;
@@ -27,8 +28,9 @@ Route::middleware('auth')->group(function () {
     Route::get('cultivos/{cultivo}/relatorio', [CultivoController::class, 'finalizar'])->name('cultivos.finalizar');
 
 
+    
     Route::resource('uso_diario', UsoDiarioController::class);
-
+    Route::resource('estoque', EstoqueController::class);
     Route::resource('biometrias', BiometriaController::class);
 
     Route::resource('funcionarios', FuncionarioController::class);
