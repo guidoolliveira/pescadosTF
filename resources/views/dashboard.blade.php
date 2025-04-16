@@ -66,12 +66,13 @@
                           </div>
                         </div>
                         <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                          @if ( $v->gramatura == 0)
-                                    Sem biometria
-                                @else 
-                                    {{ $v->gramatura}}g
-                                @endif
-                        </div>
+                          @isset($v->latestBiometria)
+                              {{ $v->latestBiometria->shrimp_weight }}g
+                          @else
+                              Sem biometria
+                          @endisset
+                      </div>
+                      
                       </div>
                     </li>       
                     @endforeach      
