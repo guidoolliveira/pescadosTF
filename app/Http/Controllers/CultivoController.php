@@ -65,9 +65,10 @@ public function store(StoreUpdateCultivo $request)
         ->exists();
 
     if ($existeCultivoAtivo) {
-        return redirect()->back()->withInput()->with('message', 'Já existe um cultivo ativo neste viveiro.');
+        return redirect()->back()->with('message', 'Já existe um cultivo ativo neste viveiro.');
     }
 
+    // Cria o cultivo normalmente
     $created = $this->cultivo->create($request->validated());
 
     if ($created) {
@@ -78,15 +79,24 @@ public function store(StoreUpdateCultivo $request)
 }
 
 
+    public function edit(Cultivo $cultivo)
+    {
+        $viveiros = Viveiro::all();
+        return view("cultivos.edit", compact('cultivo', 'viveiros'));
+    }
+
     public function update(StoreUpdateCultivo $request, string $id)
     {
-        $updated = $this->cultivo->where('id', $id)->update($request->validated());
 
+        $updated = $this->cultivo->where('id', $id)->update($request->validated());
+    
         if ($updated) {
             return redirect()->route("cultivos.index")->with('success', 'Cultivo atualizado com sucesso');
         }
+    
         return redirect()->back()->with('message', 'Erro ao atualizar cultivo');
     }
+    
 
     public function finalizar(Cultivo $cultivo)
 {

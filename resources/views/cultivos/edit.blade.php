@@ -56,10 +56,12 @@
                         <div class="flex flex-col">
                             <label class="text-gray-700 mb-1" for="viveiro_id">Viveiro*</label>
                             <select name="viveiro_id" id="viveiro_id" class="form-input w-full mt-2 rounded-md focus:border-indigo-600 @error('viveiro_id') border-red-500 @enderror">
-                                @foreach ($viveiros as $viveiro)
-                                    <option value="{{ $viveiro->id }}" @selected(old('viveiro_id', $cultivo->viveiro_id) == $viveiro->id)>
-                                        {{ $viveiro->name }}
-                                    </option>
+                            @foreach ($viveiros as $viveiro)
+                                    <option value="{{ $viveiro->id }}"
+                                        style="color: {{ $viveiro->cultivo_ativo ? 'green' : 'red' }};"
+                                        {{ old('viveiro_id') == $viveiro->id ? 'selected' : '' }}>
+                                        {{  $viveiro->name }} - {{ $viveiro->cultivo_ativo ? 'Ativo' : 'Inativo' }}
+                                    </option>                         
                                 @endforeach
                             </select>
                             @error('viveiro_id')
