@@ -57,9 +57,11 @@
                             <select name="viveiro_id" id="viveiro_id" class="form-input w-full mt-2 rounded-md focus:border-indigo-600" required>
                                 <option value="">Selecione um Viveiro</option>
                                 @foreach ($viveiros as $viveiro)
-                                    <option value="{{ $viveiro->id }}" {{ old('viveiro_id') == $viveiro->id ? 'selected' : '' }}>
-                                        {{ $viveiro->name }}
-                                    </option>
+                                    <option value="{{ $viveiro->id }}"
+                                        style="color: {{ $viveiro->cultivo_ativo ? 'green' : 'red' }};"
+                                        {{ old('viveiro_id') == $viveiro->id ? 'selected' : '' }}>
+                                        {{  $viveiro->name }} - {{ $viveiro->cultivo_ativo ? 'Ativo' : 'Inativo' }}
+                                    </option>                         
                                 @endforeach
                             </select>
                             @error('viveiro_id')
@@ -77,8 +79,8 @@
 
                         <div class="flex flex-col">
                             <label class="text-gray-700 mb-1" for="quantidade_camarao">Quantidade de Camarões*</label>
-                            <input class="form-input w-full mt-2 rounded-md focus:border-indigo-600" type="number" name="quantidade_camarao" id="quantidade_camaroes" value="{{ old('quantidade_camaroes') }}" required>
-                            @error('quantidade_camaroes')
+                            <input class="form-input w-full mt-2 rounded-md focus:border-indigo-600" type="number" name="quantidade_camarao" id="quantidade_camaroes" value="{{ old('quantidade_camarao') }}" required>
+                            @error('quantidade_camarao')
                                 <span class="text-red-600 text-sm mt-1">{{ $message }}</span>
                             @enderror
                         </div>

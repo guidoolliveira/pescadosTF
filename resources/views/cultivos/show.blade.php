@@ -34,7 +34,7 @@
 
                     <div>
                         <p class="mb-2 leading-normal text-gray-500">Quantidade de Camarões</p>
-                        <p class="font-medium text-gray-800">{{ $cultivo->quantidade_camarao }}</p>
+                        <p class="font-medium text-gray-800">{{ number_format($cultivo->quantidade_camarao, 0, ',', '.') }}</p>
                     </div>
 
                     @if ($cultivo->data_fim)

@@ -55,21 +55,28 @@ class CultivoController extends Controller
 }
 
 
-    public function store(StoreUpdateCultivo $request)
-    {
-        $created = $this->cultivo->create($request->validated());
+public function store(StoreUpdateCultivo $request)
+{
+    $viveiroId = $request->viveiro_id;
 
-        if ($created) {
-            return redirect()->route("cultivos.index")->with('success', 'Cultivo iniciado com sucesso');
-        }
-        return redirect()->back()->with('message', 'Erro ao iniciar cultivo');
+    $existeCultivoAtivo = $this->cultivo
+        ->where('viveiro_id', $viveiroId)
+        ->where('status', true) 
+        ->exists();
+
+    if ($existeCultivoAtivo) {
+        return redirect()->back()->withInput()->with('message', 'Já existe um cultivo ativo neste viveiro.');
     }
 
-    public function edit(Cultivo $cultivo)
-    {
-        $viveiros = Viveiro::all();
-        return view("cultivos.edit", compact('cultivo', 'viveiros'));
+    $created = $this->cultivo->create($request->validated());
+
+    if ($created) {
+        return redirect()->route("cultivos.index")->with('success', 'Cultivo iniciado com sucesso');
     }
+
+    return redirect()->back()->with('message', 'Erro ao iniciar cultivo');
+}
+
 
     public function update(StoreUpdateCultivo $request, string $id)
     {

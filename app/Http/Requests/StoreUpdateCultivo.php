@@ -16,7 +16,7 @@ class StoreUpdateCultivo extends FormRequest
         return [
             'viveiro_id' => ['required', 'exists:viveiros,id'],
             'data_inicio' => ['required', 'date'],
-            'quantidade_camarao' => ['required', 'numeric'],
+            'quantidade_camarao' => ['required', 'numeric', 'min:1', 'max:999999999'],
             'data_fim' => ['nullable', 'date', 'after_or_equal:data_inicio'],
         ];
     }
