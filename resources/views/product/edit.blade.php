@@ -18,19 +18,20 @@
                                 <span class="text-sm text-red-600 mt-1">{{ $message }}</span>
                             @enderror
                         </div>
+
                         <div class="flex flex-col">
+                            <label class="text-gray-700 mb-1" for="quantidade">Peso da unidade (kg)*</label>
+                            <input class="form-input w-full mt-2 rounded-md focus:border-indigo-600 @error('peso') border-red-500 @enderror"
+                                   type="number" name="peso" value="{{ old('peso', $product->weight) }}" required>
+                            @error('peso')
+                                <span class="text-sm text-red-600 mt-1">{{ $message }}</span>
+                            @enderror
+                        </div>                        
+                        {{-- <div class="flex flex-col">
                             <label class="text-gray-700 mb-1" for="quantidade">Quantidade*</label>
                             <input class="form-input w-full mt-2 rounded-md focus:border-indigo-600 @error('quantidade') border-red-500 @enderror"
                                    type="number" name="quantidade" value="{{ old('quantidade', $product->quantity) }}" required>
                             @error('quantidade')
-                                <span class="text-sm text-red-600 mt-1">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div class="flex flex-col">
-                            <label class="text-gray-700 mb-1" for="quantidade">Peso da unidade (kg)*</label>
-                            <input class="form-input w-full mt-2 rounded-md focus:border-indigo-600 @error('peso') border-red-500 @enderror"
-                                   type="number" name="quantidade" value="{{ old('peso', $product->weight) }}" required>
-                            @error('peso')
                                 <span class="text-sm text-red-600 mt-1">{{ $message }}</span>
                             @enderror
                         </div>
@@ -50,7 +51,7 @@
                             @error('validade')
                                 <span class="text-sm text-red-600 mt-1">{{ $message }}</span>
                             @enderror
-                        </div>
+                        </div> --}}
                     </div>
 
                     <div class="flex justify-end mt-6">

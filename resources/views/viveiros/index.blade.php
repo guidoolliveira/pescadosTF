@@ -50,13 +50,13 @@
                             <td class="py-4 px-6 border-b text-gray-800 text-lg">{{ $v->name }}</td>
                             <td class="py-4 px-6 border-b text-gray-600">{{ $v->area/10000 }}ha</td>
                             <td class="py-4 px-6 border-b text-gray-600">
-                                @if ( $v->gramatura == 0)
+                                @isset($v->latestBiometria)
+                                    {{ $v->latestBiometria->shrimp_weight }}g
+                                @else
                                     Sem biometria
-                                @else 
-                                    {{ $v->gramatura . 'g'}}
-                                @endif
+                                @endisset
                             </td>
-                            <td class="py-4 px-6 border-b text-gray-600">{{ $v->date ?? 'Sem biometria'}}</td>
+                            <td class="py-4 px-6 border-b text-gray-600">{{ $v->latestBiometria->date ?? 'Sem biometria'}}</td>
                             <td class="py-4 px- border-b whitespace-nowrap">
                                 <a class="text-blue-600 hover:text-blue-800 mr-4" href="{{ route('viveiros.edit', ['viveiro' => $v->id]) }}">Editar</a> 
                                 <form class="inline" action="{{ route('viveiros.destroy', ['viveiro' => $v->id]) }}" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir este viveiro?');">

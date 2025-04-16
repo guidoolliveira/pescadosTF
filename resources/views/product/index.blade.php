@@ -28,40 +28,77 @@
     <a class="" href="{{ route('products.create') }}">
         <button class="px-4 py-2 bg-gray-600 rounded-md text-white font-medium tracking-wide hover:bg-gray-500">Cadastrar</button>
     </a>
+    <a class="" href="{{ route('estoque.create') }}">
+        <button class="px-4 py-2 bg-blue-600 rounded-md text-white font-medium tracking-wide hover:bg-blue-500">Adicionar Entrada</button>
+    </a>
+    
 </div>
 @if ($products->isNotEmpty())
     <div class="bg-white shadow rounded-md overflow-hidden my-6">
         <div class="overflow-x-auto"> 
-            <table class="text-left w-full border-collapse">
+            <table class="text-left w-full border-collapse table-layout-fixed">
                 <thead class="border-b">
                     <tr>
                         <th class="py-3 px-5 bg-gray-900 font-medium uppercase text-sm text-gray-100">Produto</th>
                         <th class="py-3 px-5 bg-gray-900 font-medium uppercase text-sm text-gray-100">Quantidade</th>
-                        <th class="py-3 px-5 bg-gray-900 font-medium uppercase text-sm text-gray-100">Peso <small>(und)</small></th>
                         <th class="py-3 px-5 bg-gray-900 font-medium uppercase text-sm text-gray-100">Lote</th>
                         <th class="py-3 px-5 bg-gray-900 font-medium uppercase text-sm text-gray-100">Data de Validade</th>
+                        <th class="py-3 px-5 bg-gray-900 font-medium uppercase text-sm text-gray-100">Relatório</th>
                         <th class="py-3 px-5 bg-gray-900 font-medium uppercase text-sm text-gray-100">Ações</th>
+                        
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($products as $p)
+                        @php
+                            $totalEstoque = $p->estoque->sum('quantity');
+                        @endphp
+                
                         <tr class="hover:bg-gray-200">
                             <td class="py-4 px-6 border-b text-gray-800 text-lg">{{ $p->name }}</td>
-                            <td class="py-4 px-6 border-b text-gray-600">{{ $p->quantity }}</td>
-                            <td class="py-4 px-6 border-b text-gray-600">{{ $p->weight }} kg</td>
-                            <td class="py-4 px-6 border-b text-gray-600">{{ date('d/m/Y', strtotime($p->lot )) }}</td>
-                            <td class="py-4 px-6 border-b text-gray-600">{{ date('d/m/Y', strtotime($p->validity )) }}</td>
+                
+                            @if ($totalEstoque <= 0)
+                            <td colspan="3" class="py-4 px-6 border-b text-red-600 font-semibold justify-between items-center">
+                                Fora de Estoque
+                            </td>
+                            
+                             <td class="py-4 px- border-b whitespace-nowrap">
+                                <a class="text-blue-600 hover:text-blue-800 mr-4" href="{{ route('estoque.index', ['estoque' => $p->id]) }}">Exibir detalhes</a> 
+                            </td>
                             <td class="py-4 px- border-b whitespace-nowrap">
-                                <a class="text-blue-600 hover:text-blue-800 mr-4" href="{{ route('products.edit', ['product' => $p->id]) }}">Editar</a> 
-                                <form class="inline" action="{{ route('products.destroy', ['product' => $p->id]) }}" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir este produto?');">
+                                <a href="{{ route('products.edit', $p->id) }}" class="text-blue-600 hover:text-blue-800">Editar</a>
+                                <form action="{{ route('products.destroy', $p->id) }}" method="POST" class="inline">
                                     @csrf
-                                    <input type="hidden" name="_method" value="DELETE">
-                                    <button type="submit" class="text-red-600 hover:text-red-800">Excluir</button>
-                                </form>
-                            </td>                            
+                                    @method('DELETE')
+                                    <button type="submit" class="text-red-600 hover:text-red-800" onclick="return confirm('Tem certeza que deseja excluir este produto?')">Excluir</button>
+                                </form> 
+                            </td>
+                            
+                            @else
+                                <td class="py-4 px-6 border-b text-gray-600">{{ $totalEstoque }}</td>
+                                <td class="py-4 px-6 border-b text-gray-600">
+                                    {{ $p->estoque->first()->lot ? date('d/m/Y', strtotime($p->estoque->first()->lot)) : '-' }}
+                                </td>
+                                <td class="py-4 px-6 border-b text-gray-600">
+                                    {{ $p->estoque->first()->validity ? date('d/m/Y', strtotime($p->estoque->first()->validity)) : '-' }}
+                                </td>
+
+                                <td class="py-4 px- border-b whitespace-nowrap">
+                                    <a class="text-blue-600 hover:text-blue-800 mr-4" href="{{ route('estoque.index', ['estoque' => $p->id]) }}">Exibir detalhes</a>
+                                </td>
+                                <td class="py-4 px- border-b whitespace-nowrap">
+                                    <a href="{{ route('products.edit', $p->id) }}" class="text-blue-600 hover:text-blue-800">Editar</a>
+                                    <form action="{{ route('products.destroy', $p->id) }}" method="POST" class="inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="text-red-600 hover:text-red-800"  onclick="return confirm('Tem certeza que deseja excluir este produto?')">Excluir</button>
+                                    </form> 
+                                </td>
+                            @endif
                         </tr>
                     @endforeach
                 </tbody>
+                
             </table>
         </div>
     </div>

@@ -58,9 +58,11 @@
                             <select name="viveiro_id" id="viveiro_id" class="form-input w-full mt-2 rounded-md focus:border-indigo-600">
                                 <option value="">Selecione um Viveiro</option>
                                 @foreach ($viveiros as $viveiro)
-                                    <option value="{{ $viveiro->id }}" {{ old('viveiro_id') == $viveiro->id ? 'selected' : '' }}>
-                                        {{ $viveiro->name }}
-                                    </option>
+                                    <option value="{{ $viveiro->id }}"
+                                        style="color: {{ $viveiro->cultivo_ativo ? 'green' : 'red' }};"
+                                        {{ old('viveiro_id') == $viveiro->id ? 'selected' : '' }}>
+                                        {{  $viveiro->name }} - {{ $viveiro->cultivo_ativo ? 'Ativo' : 'Inativo' }}
+                                    </option>                         
                                 @endforeach
                             </select>
                             @error('viveiro_id')
