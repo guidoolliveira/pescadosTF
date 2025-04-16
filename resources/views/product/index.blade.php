@@ -57,7 +57,7 @@
                 
                         <tr class="hover:bg-gray-200">
                             <td class="py-4 px-6 border-b text-gray-800 text-lg">{{ $p->name }}</td>
-                            <td class="py-4 px-6 border-b text-gray-800 text-lg">{{ $p->weight }}kg</td>
+                            <td class="py-4 px-6 border-b text-gray-600">{{ $p->weight }}kg</td>
                 
                             @if ($totalEstoque <= 0)
                             <td colspan="3" class="py-4 px-6 border-b text-red-600 font-semibold justify-between items-center">
@@ -89,7 +89,7 @@
                                     <a class="text-blue-600 hover:text-blue-800 mr-4" href="{{ route('estoque.index', ['estoque' => $p->id]) }}">Exibir detalhes</a>
                                 </td>
                                 <td class="py-4 px- border-b whitespace-nowrap">
-                                    <a href="{{ route('products.edit', $p->id) }}" class="text-blue-600 hover:text-blue-800">Editar</a>
+                                    <a href="{{ route('products.edit', $p->id) }}" class="text-blue-600 hover:text-blue-800 mr-4">Editar</a>
                                     <form action="{{ route('products.destroy', $p->id) }}" method="POST" class="inline">
                                         @csrf
                                         @method('DELETE')
