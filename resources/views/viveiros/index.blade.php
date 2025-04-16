@@ -38,9 +38,9 @@
                     <tr>
                         <th class="py-3 px-5 bg-gray-900 font-medium uppercase text-sm text-gray-100">#</th>
                         <th class="py-3 px-5 bg-gray-900 font-medium uppercase text-sm text-gray-100">Área</th>
-                        <th class="py-3 px-5 bg-gray-900 font-medium uppercase text-sm text-gray-100">Última Biometria</th>
+                        <th class="py-3 px-5 bg-gray-900 font-medium uppercase text-sm text-gray-100">Gramatura</th>
                         <th class="py-3 px-5 bg-gray-900 font-medium uppercase text-sm text-gray-100">Data Biometria</th>
-
+                        <th class="py-3 px-5 bg-gray-900 font-medium uppercase text-sm text-gray-100">Status</th>
                         <th class="py-3 px-5 bg-gray-900 font-medium uppercase text-sm text-gray-100">Ações</th>
                     </tr>
                 </thead>
@@ -57,6 +57,22 @@
                                 @endisset
                             </td>
                             <td class="py-4 px-6 border-b text-gray-600">{{ $v->latestBiometria->date ?? 'Sem biometria'}}</td>
+                            <td class="py-4 px-6 border-b text-gray-600">
+                                @if ($v->cultivos->isNotEmpty())
+                                    @php
+                                        $ultimoCultivo = $v->cultivos->sortByDesc('created_at')->first();
+                                    @endphp
+
+                                    <span class="{{ $ultimoCultivo->status == 1 ? 'text-green-600 font-semibold' : 'text-red-600 font-semibold' }}">
+                                        {{ $ultimoCultivo->status == 1 ? 'Ativo' : 'Inativo' }}
+                                    </span>
+                                @else
+                                    <span class="text-gray-400 italic">Sem cultivo</span>
+                                @endif
+                            </td>
+
+
+
                             <td class="py-4 px- border-b whitespace-nowrap">
                                 <a class="text-blue-600 hover:text-blue-800 mr-4" href="{{ route('viveiros.edit', ['viveiro' => $v->id]) }}">Editar</a> 
                                 <form class="inline" action="{{ route('viveiros.destroy', ['viveiro' => $v->id]) }}" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir este viveiro?');">

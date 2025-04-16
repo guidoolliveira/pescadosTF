@@ -10,7 +10,6 @@
                     @method('PUT')
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                        {{-- Nome do viveiro --}}
                         <div class="flex flex-col">
                             <label class="text-gray-700 mb-1" for="name">Viveiro</label>
                             <input class="form-input w-full mt-2 rounded-md focus:border-indigo-600 @error('nome') border-red-500 @enderror"
@@ -20,7 +19,6 @@
                             @enderror
                         </div>
 
-                        {{-- Largura --}}
                         <div class="flex flex-col">
                             <label class="text-gray-700 mb-1" for="width">Largura</label>
                             <input class="form-input w-full mt-2 rounded-md focus:border-indigo-600 @error('largura') border-red-500 @enderror"
@@ -30,7 +28,6 @@
                             @enderror
                         </div>
 
-                        {{-- Comprimento --}}
                         <div class="flex flex-col">
                             <label class="text-gray-700 mb-1" for="length">Comprimento</label>
                             <input class="form-input w-full mt-2 rounded-md focus:border-indigo-600 @error('comprimento') border-red-500 @enderror"

@@ -7,28 +7,24 @@
                 <form method="POST" action="{{ route('viveiros.store') }}">
                     @csrf
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                        <!-- Campo: Nome -->
                         <div class="flex flex-col">
                             <label class="text-gray-700 mb-1" for="name">Viveiro*</label>
-                            <input class="form-input w-full mt-2 rounded-md focus:border-indigo-600" type="text" name="nome" value="{{ old('nome') }}">
+                            <input class="form-input w-full mt-2 rounded-md focus:border-indigo-600" type="text" name="nome" value="{{ old('nome') }}" required>
                             @error('nome')
                                 <span class="text-red-600 text-sm mt-1">{{ $message }}</span>
                             @enderror
                         </div>
-
-                        <!-- Campo: Largura -->
                         <div class="flex flex-col">
                             <label class="text-gray-700 mb-1" for="width">Largura* (m)</label>
-                            <input class="form-input w-full mt-2 rounded-md focus:border-indigo-600" type="number" name="largura" value="{{ old('largura') }}">
+                            <input class="form-input w-full mt-2 rounded-md focus:border-indigo-600" type="number" name="largura" value="{{ old('largura') }}" required>
                             @error('largura')
                                 <span class="text-red-600 text-sm mt-1">{{ $message }}</span>
                             @enderror
                         </div>
 
-                        <!-- Campo: Comprimento -->
                         <div class="flex flex-col">
                             <label class="text-gray-700 mb-1" for="length">Comprimento* (m)</label>
-                            <input class="form-input w-full mt-2 rounded-md focus:border-indigo-600" type="number" name="comprimento" value="{{ old('comprimento') }}">
+                            <input class="form-input w-full mt-2 rounded-md focus:border-indigo-600" type="number" name="comprimento" value="{{ old('comprimento') }}" required>
                             @error('comprimento')
                                 <span class="text-red-600 text-sm mt-1">{{ $message }}</span>
                             @enderror
