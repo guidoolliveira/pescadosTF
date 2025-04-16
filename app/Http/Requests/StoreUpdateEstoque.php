@@ -22,11 +22,10 @@ class StoreUpdateEstoque extends FormRequest
     public function rules(): array
     {
         return [
-            'nome' => 'required|string|max:255', 
-            'quantidade' => 'required|numeric|gt:0|digits_between:1, 4',
-            'peso' => 'required|numeric|gt:0|digits_between:1, 2',
-            'lote' => 'required|date|date_format:Y-m-d',
-            'validade' => 'required|date|date_format:Y-m-d'
+        'product_id' => 'required|exists:products,id',
+        'quantidade' => 'required|numeric|min:1',
+        'lote'=> 'required|string|max:50',
+        'validade'=> 'required|date_format:Y-m-d|after:today',
         ];
         
         
