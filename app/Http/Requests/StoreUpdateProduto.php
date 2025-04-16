@@ -24,9 +24,6 @@ class StoreUpdateProduto extends FormRequest
         return [
             'nome' => 'required|string|max:255', 
             'peso' => 'required|numeric|gt:0|digits_between:1, 2',
-            'quantidade' => 'required|numeric|min:1',
-            'lote'       => 'required|string|max:50',
-            'validade'   => 'required|date_format:Y-m-d|after:today',
         ];
         
         

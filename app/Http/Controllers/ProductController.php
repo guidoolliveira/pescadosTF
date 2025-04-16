@@ -44,9 +44,14 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreUpdateProduto  $request)
+    public function store(Request $request)
 {
-    
+    $request->validate([
+        'nome' => 'required|string|max:255', 
+        'peso' => 'required|numeric|gt:0|digits_between:1, 2',
+        'quantidade' => 'required|numeric|min:1',
+        'lote'=> 'required|string|max:50',
+        'validade'=> 'required|date_format:Y-m-d|after:today',]);
     $product = $this->product->create([
         'name'   => $request->input('nome'),
         'weight' => $request->input('peso'),
