@@ -56,8 +56,14 @@
                                     Sem biometria
                                 @endisset
                             </td>
-                            <td class="py-4 px-6 border-b text-gray-600">{{ $v->latestBiometria->date ?? 'Sem biometria'}}</td>
                             <td class="py-4 px-6 border-b text-gray-600">
+                                @if ($v->latestBiometria)
+                                    {{ \Carbon\Carbon::parse($v->latestBiometria->date)->format('d/m/Y') }}
+                                @else
+                                    Sem biometria
+                                @endif
+                            </td>
+                           <td class="py-4 px-6 border-b text-gray-600">
                                 @if ($v->cultivos->isNotEmpty())
                                     @php
                                         $ultimoCultivo = $v->cultivos->sortByDesc('created_at')->first();
