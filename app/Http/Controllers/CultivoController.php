@@ -31,11 +31,29 @@ class CultivoController extends Controller
     }
     public function show($id)
 {
+    $cultivo = Cultivo::with(['viveiro.latestBiometria', 'usoDiarios', 'biometrias'])->findOrFail($id);
 
-    $cultivo = Cultivo::with('viveiro')->findOrFail($id);
+    $dataInicio = strtotime(date('Y-m-d', strtotime($cultivo->data_inicio)));
+    $hoje = strtotime(date('Y-m-d'));
+    $diasCultivo = floor(($hoje - $dataInicio) / (60 * 60 * 24));
 
-    return view('cultivos.show', compact('cultivo'));
+    $consumoPorProduto = $cultivo->usoDiarios()
+        ->with('produto')
+        ->get()
+        ->groupBy('produto_id')
+        ->map(function ($grupo) {
+            $ultimoConsumo = $grupo->sortByDesc('data')->first();
+            return [
+                'produto' => $grupo->first()->produto->name ?? 'Desconhecido',
+                'quantidade_total' => $grupo->sum('quantidade_utilizada'),
+                'ultimo_consumo' => $ultimoConsumo ? $ultimoConsumo->quantidade_utilizada : 0,
+                'data_ultimo_consumo' => $ultimoConsumo ? $ultimoConsumo->data : null,
+            ];
+        });
+
+    return view('cultivos.show', compact('cultivo', 'diasCultivo', 'consumoPorProduto'));
 }
+
 
     public function store(StoreUpdateCultivo $request)
     {
