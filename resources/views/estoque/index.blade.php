@@ -44,7 +44,7 @@
             </div>
         @endif
     </div>
-        <h3 class="text-gray-700 text-3xl font-medium">Estoque de {{ $product->name }} => {{$totalEstoque = $product->estoque->sum('quantity')}} unidades</h3>
+        <h3 class="text-gray-700 text-3xl font-medium">Estoque de {{ $product->name }} -> {{$totalEstoque = $product->estoque->sum('quantity')}} unidades</h3>
         <div class="mt-2 ">
             <a href="{{ route('products.index') }}" class="text-blue-600 hover:text-blue-800 transition-colors duration-300">
                 ← Voltar para a lista de produtos

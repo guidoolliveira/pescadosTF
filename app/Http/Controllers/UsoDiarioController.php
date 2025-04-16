@@ -179,7 +179,7 @@ class UsoDiarioController extends Controller
                 }
     
                 if ($restante > 0) {
-                    return redirect()->back()->with('warning', "Estoque insuficiente. Faltaram {$restante} unidades para completar a baixa.");
+                    return redirect()->back()->withInput()->with('message', "Estoque insuficiente. Faltaram {$restante} unidades para completar a baixa.");
                 }
             }
         }

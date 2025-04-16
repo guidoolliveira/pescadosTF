@@ -40,6 +40,7 @@
                 <thead class="border-b">
                     <tr>
                         <th class="py-3 px-5 bg-gray-900 font-medium uppercase text-sm text-gray-100">Produto</th>
+                        <th class="py-3 px-5 bg-gray-900 font-medium uppercase text-sm text-gray-100">Peso<small>(und)</small></th>
                         <th class="py-3 px-5 bg-gray-900 font-medium uppercase text-sm text-gray-100">Quantidade</th>
                         <th class="py-3 px-5 bg-gray-900 font-medium uppercase text-sm text-gray-100">Lote</th>
                         <th class="py-3 px-5 bg-gray-900 font-medium uppercase text-sm text-gray-100">Data de Validade</th>
@@ -56,6 +57,7 @@
                 
                         <tr class="hover:bg-gray-200">
                             <td class="py-4 px-6 border-b text-gray-800 text-lg">{{ $p->name }}</td>
+                            <td class="py-4 px-6 border-b text-gray-800 text-lg">{{ $p->weight }}kg</td>
                 
                             @if ($totalEstoque <= 0)
                             <td colspan="3" class="py-4 px-6 border-b text-red-600 font-semibold justify-between items-center">
