@@ -125,51 +125,63 @@ class UsoDiarioController extends Controller
         }
     
         $produto = Product::findOrFail($request->produto_id);
-        $quantidade_utilizada = $request->quantidade_utilizada;
+        $novoValorKg = $request->quantidade_utilizada;
+        $valorAntigoKg = $usoDiario->quantidade_utilizada;
     
         $peso_unidade = $produto->weight;
-        $quantidadeNecessaria = floor($quantidade_utilizada / $peso_unidade);
     
-        $estoque = $produto->estoque()
-            ->orderBy('validity')
-            ->orderBy('created_at')
-            ->get();
+        $novaQtdUnidades   = floor($novoValorKg / $peso_unidade);
+        $antigaQtdUnidades = floor($valorAntigoKg / $peso_unidade);
+        $diferenca         = $novaQtdUnidades - $antigaQtdUnidades;
     
-        if ($usoDiario->quantidade_utilizada > 0) {
-            $entradaAnterior = $usoDiario->produto->estoque()->where('id', $usoDiario->produto_id)->first();
+        if (abs($diferenca) >= 1) {
+            $estoque = $produto->estoque()
+                ->orderBy('validity')
+                ->orderBy('created_at')
+                ->get();
     
-            if ($entradaAnterior) {
-                $quantidadeAnterior = $entradaAnterior->quantity;
-                $entradaAnterior->quantity += $usoDiario->quantidade_utilizada; // Restaurar a quantidade anterior
-                $entradaAnterior->save();
-            } else {
-                $quantidadeAnterior = 0;
+            if ($diferenca < 0) {
+                $restaurar = abs($diferenca);
+                foreach ($estoque as $e) {
+                    if ($restaurar <= 0) break;
+    
+                    $anterior = $e->quantity;
+                    $e->quantity += $restaurar;
+                    $e->save();
+    
+                    $e->historico()->create([
+                        'quantidade_anterior' => $anterior,
+                        'quantidade_utilizada' => -$restaurar,
+                    ]);
+    
+                    $restaurar = 0;
+                }
             }
-        }
     
-        $restante = $quantidadeNecessaria;  
+            if ($diferenca > 0) {
+                $restante = $diferenca;
+                foreach ($estoque as $e) {
+                    if ($restante <= 0) break;
+                    if ($e->quantity == 0) continue;
     
-        foreach ($estoque as $e) {
-            if ($restante <= 0) break; 
-            if ($e->quantity == 0) continue;  
+                    $usado = min($restante, $e->quantity);
+                    $anterior = $e->quantity;
     
-            $usado = min($restante, $e->quantity);
-            $anterior = $e->quantity;
+                    $e->quantity -= $usado;
+                    $e->save();
     
-            $e->quantity -= $usado;
-            $e->save();
+                    $e->historico()->create([
+                        'quantidade_anterior' => $anterior,
+                        'quantidade_utilizada' => $usado,
+                    ]);
     
-
-            $e->historico()->create([
-                'quantidade_anterior' => $anterior,
-                'quantidade_utilizada' => $usado,
-            ]);
+                    $restante -= $usado;
+                }
     
-            $restante -= $usado;
-        }
-    
-        if ($restante > 0) {
-            return redirect()->back()->with('warning', "Estoque insuficiente. Faltaram {$restante} kg para completar a baixa.");
+                if ($restante > 0) {
+                    return redirect()->back()->with('warning', "Estoque insuficiente. Faltaram {$restante} unidades para completar a baixa.");
+                }
+            }
         }
     
         $usoDiario->update([
@@ -180,8 +192,9 @@ class UsoDiarioController extends Controller
             'cultivo_id' => $cultivoAtivo->id,
         ]);
     
-        return redirect()->route('uso_diario.index')->with('success', 'Uso diário atualizado e baixa no estoque realizada com sucesso.');
+        return redirect()->route('uso_diario.index')->with('success', 'Uso diário atualizado com sucesso.');
     }
+    
     
 public function destroy(UsoDiario $usoDiario)
 {
