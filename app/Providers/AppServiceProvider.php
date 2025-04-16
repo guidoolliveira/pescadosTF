@@ -24,6 +24,14 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
          Builder::defaultStringLength(125);
-         View::share('outOfStockProducts', Product::where('quantity', 0)->get());
+         View::composer('*', function ($view) {
+            $products = Product::with('estoque')->get();
+    
+            $outOfStockProducts = $products->filter(function ($product) {
+                return $product->estoque()->sum('quantity') == 0;
+            });
+    
+            $view->with('outOfStockProducts', $outOfStockProducts);
+        });
     }
 }

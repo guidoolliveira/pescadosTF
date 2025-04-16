@@ -16,15 +16,7 @@ class ViveiroController extends Controller
     }
     public function index()
     {
-        $viveiros = Viveiro::select(
-            'viveiros.id',
-            'viveiros.name',
-            'viveiros.area',
-            'biometrias.id as biometria_id',
-            'biometrias.date as date',
-            'biometrias.shrimp_weight as gramatura'
-        )->leftJoin('biometrias', function($join) {
-            $join->on('viveiros.id', '=', 'biometrias.viveiro_id')->whereRaw('biometrias.date = (SELECT MAX(date) FROM biometrias WHERE viveiro_id = viveiros.id)');})->get();
+        $viveiros = Viveiro::with('latestBiometria')->get();
         
         return view("viveiros.index", ['viveiros' => $viveiros]);
     }
