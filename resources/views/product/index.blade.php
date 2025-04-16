@@ -47,8 +47,6 @@
                         <th class="py-3 px-5 bg-gray-900 font-medium uppercase text-sm text-gray-100">Produto</th>
                         <th class="py-3 px-5 bg-gray-900 font-medium uppercase text-sm text-gray-100">Peso<small>(und)</small></th>
                         <th class="py-3 px-5 bg-gray-900 font-medium uppercase text-sm text-gray-100">Quantidade</th>
-                        <th class="py-3 px-5 bg-gray-900 font-medium uppercase text-sm text-gray-100">Lote</th>
-                        <th class="py-3 px-5 bg-gray-900 font-medium uppercase text-sm text-gray-100">Data de Validade</th>
                         <th class="py-3 px-5 bg-gray-900 font-medium uppercase text-sm text-gray-100">Relatório</th>
                         <th class="py-3 px-5 bg-gray-900 font-medium uppercase text-sm text-gray-100">Ações</th>
                         
@@ -82,14 +80,7 @@
                             </td>
                             
                             @else
-                                <td class="py-4 px-6 border-b text-gray-600">{{ $totalEstoque }}</td>
-                                <td class="py-4 px-6 border-b text-gray-600">
-                                    {{ $p->estoque->first()->lot ? date('d/m/Y', strtotime($p->estoque->first()->lot)) : '-' }}
-                                </td>
-                                <td class="py-4 px-6 border-b text-gray-600">
-                                    {{ $p->estoque->first()->validity ? date('d/m/Y', strtotime($p->estoque->first()->validity)) : '-' }}
-                                </td>
-
+                                <td class="py-4 px-6 border-b text-gray-600">{{ $totalEstoque }} <small>(und)</small></td>
                                 <td class="py-4 px- border-b whitespace-nowrap">
                                     <a class="text-blue-600 hover:text-blue-800 mr-4" href="{{ route('estoque.index', ['estoque' => $p->id]) }}">Exibir detalhes</a>
                                 </td>

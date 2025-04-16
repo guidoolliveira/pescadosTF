@@ -84,6 +84,7 @@ class UsoDiarioController extends Controller
         'viveiro_id' => $viveiro->id,
         'produto_id' => $request->produto_id,
         'data' => $request->data,
+        'observacoes' => $request->observacoes,
         'quantidade_utilizada' => $quantidade_utilizada,
     ]);
 
@@ -189,6 +190,7 @@ class UsoDiarioController extends Controller
             'produto_id' => $request->produto_id,
             'data' => $request->data,
             'quantidade_utilizada' => $request->quantidade_utilizada,
+            'observacoes' => $request->observacoes,
             'cultivo_id' => $cultivoAtivo->id,
         ]);
     

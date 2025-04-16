@@ -82,8 +82,11 @@ class ViveiroController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(StoreUpdateViveiro $request, string $id)
+    public function update(Request $request, string $id)
     {
+        $request->validate(['nome' => 'required|string|max:255',
+            'largura' => 'required|numeric|gt:0|lte:999',
+            'comprimento' => 'required|numeric|gt:0|lte:999',]);
         $updated = $this->viveiro->where('id', $id)->update(['name' => $request->input('nome'),
             'width' => $request->input('largura'),
             'length' => $request->input('comprimento'),

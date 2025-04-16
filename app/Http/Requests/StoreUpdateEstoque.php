@@ -28,7 +28,15 @@ class StoreUpdateEstoque extends FormRequest
         'validade'=> 'required|date_format:Y-m-d|after:today',
         ];
         
+
         
         
     }
+    public function messages()
+{
+    return [
+        'validade.after' => 'A data de validade deve ser uma data futura.',
+    ];
+}
+
 }

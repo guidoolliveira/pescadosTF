@@ -72,7 +72,7 @@
                             @foreach ($estoques as $estoque)
                                 <tr class="hover:bg-gray-200">
                                     <td class="py-4 px-6 border-b text-gray-600">{{ date('d/m/Y', strtotime($estoque->lot)) }}</td>
-                                    <td class="py-4 px-6 border-b text-gray-800"><strong>{{ $estoque->quantity }}</strong></td>
+                                    <td class="py-4 px-6 border-b text-gray-800">{{ $estoque->quantity }}</td>
                                     <td class="py-4 px-6 border-b text-gray-600">{{ date('d/m/Y', strtotime($estoque->validity)) }}</td>
                                     <td class="py-4 px-6 border-b whitespace-nowrap">
                                         <a href="{{ route('estoque.edit', $estoque->id) }}" class="text-blue-600 hover:text-blue-800 mr-4">Editar</a>
