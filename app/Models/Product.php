@@ -11,9 +11,10 @@ class Product extends Model
 
     protected $fillable = [
         'name',
-        'validity',
-        'quantity',
-        'lot',
         'weight'
     ];
+    public function estoque()
+    {
+        return $this->hasMany(Estoque::class);
+    }
 }
