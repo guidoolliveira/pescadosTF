@@ -23,4 +23,16 @@ class Viveiro extends Model
     {
         return $this->hasMany(Cultivo::class);
     }
+    public function getCultivoAtivoAttribute()
+    {
+        return $this->cultivos()->where('status', 1)->first();
+    }
+    // App\Models\Viveiro.php
+
+    public function latestBiometria()
+    {
+        return $this->hasOne(Biometria::class)->latest('date')->latest('id');
+    }
+
+
 }

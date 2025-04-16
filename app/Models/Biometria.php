@@ -16,12 +16,17 @@ class Biometria extends Model
         'description', 
         'image',
         'viveiro_id',
+        'cultivo_id',
         'shrimp_weight'
     ];
 
     public function viveiro()
     {
         return $this->belongsTo(Viveiro::class);
+    }
+    public function cultivos()
+    {
+        return $this->belongsTo(Cultivo::class);
     }
     
 }
