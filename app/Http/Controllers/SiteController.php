@@ -17,14 +17,19 @@ class SiteController extends Controller
     {     
 
 
-        $viveiros = Viveiro::with('latestBiometria')->get();
+        $viveiros = Viveiro::with('latestBiometria')->paginate(3);
 
         $products = Product::with('estoque')->get();
 
       
-        $lowestQuantityProducts = $products->sortBy(function ($product) {
-            return $product->estoque->sum('quantity');
-        })->take(3);
+        $lowestQuantityProducts = $products->map(function ($product) {
+            $totalQuantity = $product->estoque->sum('quantity');
+            return [
+                'product' => $product,
+                'total_quantity' => $totalQuantity,
+            ];
+        })->sortBy('total_quantity')->take(5);
+        
 
         $totalViveiros = Viveiro::count();
         $totalFuncionarios = Funcionario::count();

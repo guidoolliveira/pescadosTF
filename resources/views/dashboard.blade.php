@@ -28,12 +28,12 @@
                               <div class="flex items-center min-w-0">
                                   <div class="ml-3">
                                       <p class="font-medium text-gray-900 truncate dark:text-white">
-                                          {{ $p->name }}
+                                          {{ $p['product']->name }}
                                       </p>
                                   </div>
                               </div>
                               <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                                  {{ $p->quantity }}
+                                  {{ $p['total_quantity'] }} unidades
                               </div>
                           </div>
                       </li>
@@ -54,52 +54,38 @@
             </ul>
             <div id="fullWidthTabContent" class="border-t border-gray-200 dark:border-gray-600">
                 <div class="hidden pt-4" id="faq" role="tabpanel" aria-labelledby="faq-tab">
-                  <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
-                    @foreach ($viveiros as $v)
-                    <li class="py-3 sm:py-4">
-                      <div class="flex items-center justify-between">
-                        <div class="flex items-center min-w-0">
-                          <div class="ml-3">
-                            <p class="font-medium text-gray-900 truncate dark:text-white">
-                              Viveiro {{$v->name}}
-                            </p>
-                          </div>
-                        </div>
-                        <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                          @isset($v->latestBiometria)
-                              {{ $v->latestBiometria->shrimp_weight }}g
-                          @else
-                              Sem biometria
-                          @endisset
-                      </div>
-                      
-                      </div>
-                    </li>       
-                    @endforeach      
-                  </ul>
+                <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+    @foreach ($viveiros as $v)
+    <li class="py-3 sm:py-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center min-w-0">
+          <div class="ml-3">
+            <p class="font-medium text-gray-900 truncate dark:text-white">
+               {{$v->name}}
+            </p>
+          </div>
+        </div>
+        <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+          @isset($v->latestBiometria)
+              {{ $v->latestBiometria->shrimp_weight }}g
+          @else
+              Sem biometria
+          @endisset
+        </div>
+      </div>
+    </li>       
+    @endforeach      
+</ul>
+
+<!-- Paginação -->
+<div class="mt-4">
+    {{ $viveiros->links() }}
+</div>
+
                 </div>
             </div>
           </div>
         </div>
-        <div class="grid w-full grid-cols-1 gap-4 mt-4 xl:grid-cols-2 2xl:grid-cols-3">
-          <div class="items-center justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:flex dark:border-gray-700 sm:p-6 dark:bg-gray-800">
-            <div class="w-full">
-              <h3 class="text-base font-normal text-gray-500 dark:text-gray-400">Quantidade de Produtos</h3>
-              <span class="text-2xl font-bold leading-none text-gray-900 sm:text-3xl dark:text-white">{{ $totalProducts }}</span>
-            </div>
-            <div class="w-full" id="new-products-chart"></div>
-          </div>
-          <div class="items-center justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:flex dark:border-gray-700 sm:p-6 dark:bg-gray-800">
-            <div class="w-full">
-              <h3 class="text-base font-normal text-gray-500 dark:text-gray-400">Quantidade de Viveiros</h3>
-              <span class="text-2xl font-bold leading-none text-gray-900 sm:text-3xl dark:text-white">{{ $totalViveiros }}</span>
-            </div>
-        </div>
-          <div class="items-center justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:flex dark:border-gray-700 sm:p-6 dark:bg-gray-800">
-            <div class="w-full">
-              <h3 class="text-base font-normal text-gray-500 dark:text-gray-400">Quantidade de Funcionários</h3>
-              <span class="text-2xl font-bold leading-none text-gray-900 sm:text-3xl dark:text-white">{{ $totalFuncionarios }}</span>
-            </div>
-        </div>
+        
         
 </x-app-layout>
