@@ -22,7 +22,7 @@ class StoreUpdateViveiro extends FormRequest
     public function rules(): array
     {
         return [
-            'nome' => 'required|string|max:255',
+            'nome' => 'required|string|max:255|unique:viveiros,name',
             'largura' => 'required|numeric|gt:0|lte:999',
             'comprimento' => 'required|numeric|gt:0|lte:999',
         ];
